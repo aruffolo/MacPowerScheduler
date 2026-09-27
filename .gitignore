@@ -1,0 +1,48 @@
+# macOS metadata
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Xcode user state (keep projects, workspaces and shared schemes)
+xcuserdata/
+*.xcuserstate
+
+# SwiftPM and Xcode build products
+.build/
+/build/
+DerivedData/
+.derivedData/
+*.hmap
+*.xcarchive/
+*.app/
+*.ipa
+*.dSYM/
+*.dSYM.zip
+*.xcresult
+*.xctestproducts/
+*.profraw
+*.profdata
+
+# Playground-generated state
+timeline.xctimeline
+playground.xcworkspace/
+
+# Local signing configuration and credentials
+/Configurations/Local.xcconfig
+*.p12
+*.p8
+*.keychain
+*.keychain-db
+*.mobileprovision
+*.provisionprofile
+
+# Developer tool caches
+.swiftlint_cache
+.swiftformat.cache
+__pycache__/
+*.py[cod]
+
+# Keep Package.resolved, shared .swiftpm configuration, app assets and
+# Package/Tests/**/__Snapshots__ references in source control.

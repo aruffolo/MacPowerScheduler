@@ -1,0 +1,36 @@
+{
+  "minimumLinePercent": 95,
+  "unit": [
+    "PowerScheduleCore/ClockTime.swift",
+    "PowerScheduleCore/PowerEvent.swift",
+    "PowerScheduleCore/ScheduleEdit.swift",
+    "PowerScheduleCore/ScheduleError.swift",
+    "PowerScheduleCore/ScheduleSnapshot.swift",
+    "PowerScheduleCLI/CLICommand.swift",
+    "PowerScheduleCLI/CLIRunner.swift",
+    "PowerScheduleSystem/PMSetParser.swift",
+    "PowerScheduleSystem/RepeatingPreferences.swift",
+    "PowerScheduleSystem/SystemSchedule.swift",
+    "PowerScheduleIPC/HelperClient.swift",
+    "PowerScheduleIPC/HelperProtocol.swift",
+    "PowerScheduleIPC/PendingReply.swift",
+    "PowerScheduleIPC/SigningRequirement.swift",
+    "PowerScheduleService/ScheduleService.swift",
+    "PowerScheduleService/HelperRequestHandler.swift",
+    "PowerScheduleService/GrantStoragePolicy.swift",
+    "PowerScheduleUI/ScheduleModel.swift",
+    "PowerScheduleUI/SchedulingPlatform.swift"
+  ],
+  "integration": {
+    "PowerScheduleSystem/BoundedProcess.swift": "Real Foundation process, pipe, signal and timeout behavior; safe process adapter suite.",
+    "PowerScheduleSystem/LiveSystemSchedule.swift": "Fixed pmset path, effective UID and system preference file I/O; approved live helper/system tests.",
+    "PowerScheduleIPC/XPCTransport.swift": "Real NSXPC connection, signed peers, interruption and timeout wiring; signed integration probes.",
+    "PowerScheduleIPC/SigningPolicy.swift": "Security.framework inspection of the executing signature; signed/unsigned binary integration tests.",
+    "PowerScheduleIPC/AdministratorAuthorization.swift": "Authorization Services handles, system prompts and external forms; attended authorization integration tests.",
+    "PowerScheduleService/GrantStore.swift": "OpenDirectory account resolution and POSIX ownership, permissions and atomic storage; isolated filesystem and signed account integration tests.",
+    "PowerScheduleService/HelperServer.swift": "NSXPC listener and trusted peer UID capture; signed listener integration tests.",
+    "PowerScheduleUI/MacSchedulingPlatform.swift": "SMAppService registration, system approval and authorization composition; attended lifecycle integration tests.",
+    "PowerScheduleUI/PowerScheduleView.swift": "SwiftUI lifecycle wiring; manual packaged-app launch and foreground checks. Editor decisions are measured in ScheduleModel.",
+    "PowerScheduleUI/ScheduleContentView.swift": "SwiftUI rendering and control wiring; Point-Free image snapshots plus manual interaction/accessibility validation. Editor decisions are measured in ScheduleModel."
+  }
+}

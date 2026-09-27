@@ -1,0 +1,33 @@
+#!/bin/bash
+# Format staged Swift files using the shared Tetris-style configuration.
+set -euo pipefail
+export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH}"
+cd "$(git rev-parse --show-toplevel)"
+
+if ! command -v swiftformat >/dev/null 2>&1; then
+    echo "pre-commit: swiftformat not installed. Install via 'brew install swiftformat'." >&2
+    exit 1
+fi
+
+files=()
+while IFS= read -r -d '' file; do
+    case "$file" in
+        *.swift) files+=("$file") ;;
+    esac
+done < <(git diff --cached --name-only -z --diff-filter=ACM)
+
+if [ ${#files[@]} -eq 0 ]; then
+    exit 0
+fi
+
+# Re-staging a partially staged file would include unrelated working-tree edits.
+for file in "${files[@]}"; do
+    if ! git diff --quiet -- "$file"; then
+        echo "pre-commit: $file has unstaged edits; format and stage the intended changes before committing." >&2
+        exit 1
+    fi
+done
+
+echo "SwiftFormat on staged Swift files"
+swiftformat --cache ignore --config .swiftformat "${files[@]/#/./}"
+git add -- "${files[@]}"

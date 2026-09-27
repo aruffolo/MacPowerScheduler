@@ -1,0 +1,73 @@
+disabled_rules:
+  - todo
+  - trailing_whitespace
+  - vertical_whitespace_between_cases
+  - nesting
+  - implicit_return
+  - identifier_name
+
+opt_in_rules:
+  - closure_end_indentation
+  - empty_count
+  - explicit_init
+  - force_unwrapping
+  - redundant_nil_coalescing
+  - yoda_condition
+  - shorthand_optional_binding
+  - weak_delegate
+
+analyzer_rules:
+  - unused_import
+
+excluded:
+  - Sources/**/Generated
+  - .build
+  - .derivedData
+  - Carthage
+  - Pods
+  - DerivedData
+  - ../.build
+  - ../.derivedData
+  - ../DerivedData
+  - Tests
+
+trailing_comma:
+    mandatory_comma: true
+
+allow_zero_lintable_files: true
+
+line_length:
+  warning: 180
+  error: 180
+  ignores_comments: true
+  ignores_urls: true
+
+type_body_length:
+  warning: 350
+  error: 450
+
+file_length:
+  warning: 500
+  error: 900
+
+function_body_length:
+  error: 35
+
+cyclomatic_complexity:
+  ignores_case_statements: true
+  warning: 20
+
+force_unwrapping:
+  severity: warning
+
+large_tuple:
+  - 3  # warning
+  - 10 # error
+
+custom_rules:
+  combine_assign_to_self:
+    included: ".*\\.swift"
+    name: "`assign` to self"
+    regex: '\\.assign\\(to: [^,]*, on: self\\)'
+    message: "For assigning on self, use assignNoRetain(to: ..., on: self)."
+    severity: error

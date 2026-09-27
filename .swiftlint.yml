@@ -1,0 +1,55 @@
+disabled_rules:
+  - todo
+  - trailing_whitespace
+  - vertical_whitespace_between_cases
+  - identifier_name
+  - large_tuple
+  - nesting
+  - implicit_return
+  - trailing_comma
+
+opt_in_rules:
+  - closure_end_indentation
+  - empty_count
+  - explicit_init
+  - force_unwrapping
+  - redundant_nil_coalescing
+  - yoda_condition
+
+analyzer_rules:
+  - unused_import
+
+excluded:
+  - Package/Sources/**/Generated
+  - Package/.build
+  - .build
+  - .derivedData
+  - Carthage
+  - Pods
+  - DerivedData
+  - MacPowerScheduler.xcodeproj
+  - Package/Tests
+
+line_length:
+  ignores_comments: true
+  ignores_interpolated_strings: true
+  warning: 130
+  error: 160
+
+type_body_length:
+  warning: 350
+  error: 450
+
+file_length:
+  warning: 500
+  error: 900
+
+function_body_length:
+  error: 35
+
+cyclomatic_complexity:
+  warning: 15
+  error: 25
+
+force_unwrapping:
+  severity: warning
