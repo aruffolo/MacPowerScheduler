@@ -18,7 +18,7 @@ public final class ScheduleModel {
     public private(set) var helperReady = false
     public private(set) var signingReady = false
     public private(set) var permissionDescription = "Power scheduling needs setup."
-    public private(set) var editRevision: String?
+    private var draftBaseline: ScheduleSnapshot?
     private let platform: any SchedulingPlatform
     private let helper: any HelperCalling
     private let read: @Sendable () async throws -> ScheduleSnapshot
@@ -40,6 +40,10 @@ public final class ScheduleModel {
         shutdownTime = calendar.date(from: DateComponents(year: 2001, month: 1, day: 1, hour: 23)) ?? .now
     }
 
+    public var editRevision: String? {
+        draftBaseline?.revision
+    }
+
     public var needsReplacement: Bool {
         current.map { !$0.isDailyEditable } ?? false
     }
@@ -53,11 +57,11 @@ public final class ScheduleModel {
     }
 
     public var isDirty: Bool {
-        guard let current else { return false }
-        return startupEnabled != (current.startup != nil)
-            || shutdownEnabled != (current.shutdown != nil)
-            || (startupEnabled && clock(startupTime) != current.startup?.time)
-            || (shutdownEnabled && clock(shutdownTime) != current.shutdown?.time)
+        guard let draftBaseline else { return false }
+        return startupEnabled != (draftBaseline.startup != nil)
+            || shutdownEnabled != (draftBaseline.shutdown != nil)
+            || (startupEnabled && clock(startupTime) != draftBaseline.startup?.time)
+            || (shutdownEnabled && clock(shutdownTime) != draftBaseline.shutdown?.time)
     }
 
     private func clock(_ date: Date) -> ClockTime? {
@@ -74,7 +78,7 @@ public final class ScheduleModel {
         if let time = snapshot.shutdown?.time {
             shutdownTime = date(time)
         }
-        editRevision = snapshot.revision
+        draftBaseline = snapshot
     }
 
     private func date(_ time: ClockTime) -> Date {
@@ -104,7 +108,6 @@ public final class ScheduleModel {
         } catch {
             self.error = error.localizedDescription
             current = nil
-            editRevision = nil
         }
         await refreshPermission()
     }

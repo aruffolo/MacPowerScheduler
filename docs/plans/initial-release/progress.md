@@ -3,6 +3,7 @@
 ## Resume Here
 
 - Overall execution status: application implemented; earlier signed/notarized candidate verified. R2 snapshot replacement passed check/strict gates with 20 reviewed images; installed-helper, manual UI and physical gates remain open.
+- Latest correction: editor drafts survive read failures; TDD reproduction and fix verified with fresh check/strict gates (98 unit tests, 97.74% scoped coverage). See the draft-preservation receipt below.
 - Plan revision observed: `R2`, user-approved replacement of app UI automation with Point-Free snapshots on 2026-09-27.
 - Execution mode: supervised; Goal mode not enabled.
 - Active phase/task: `P3` / `VAL-GUI`, automated snapshot/model evidence complete; manual packaged-app/accessibility and signed production checks remain.
@@ -292,3 +293,12 @@ Project/workspace/scheme regeneration is hash-stable. Python sources compile and
 - Codex autoreview (`autoreview --mode local --engine codex`) completed in two bounded passes with zero findings. The helper cannot accept PNG binary content, so its input was an isolated byte-for-byte copy of all 118 text files, with a hash inventory for 30 separately inspected images. Verified every copied file and image hash against the actual commit candidates. Review reports remain outside the repository; logs are ignored.
 - Secret scanning identified a Python test method name as a false credential match. Confirmed the match was exactly the identifier, shortened the method name without changing assertions, and reran tooling tests and review successfully. No credential was added or exposed.
 - Staged 148 intended project files, including all snapshot references and the lockfile. Existing formatter-compatible whitespace notices in copied guidance/configuration and the CLI multiline help string were left unchanged. The source checkpoint is not a release-readiness claim: signed-helper, manual UI and physical gates remain open. No push, publication or live power operation authorized.
+
+### 2026-09-27 — Preserve editor drafts through read failures
+
+- User requested verification and a TDD fix for the suspected loss of unsaved edits. Added deterministic Swift Testing sequences using the real ScheduleModel and injected readers/helper/platform fixtures; no real scheduling or authorization occurs.
+- Red: before production changes, the new recovery regression failed in both parameter cases. A failed read cleared the editor revision/dirty state; recovery reset 08:00 to 07:30, or discarded the draft and conflict when the system schedule changed. Clean-editor and explicit-discard controls already passed. Evidence: `.build/DraftPreservation/red.log`.
+- Fix: retain the draft's baseline independently of the latest readable system snapshot, derive editRevision from that baseline, and compare unsaved changes against it. Unreadable state still clears current and disables Apply. Successful recovery preserves edits and stale-revision detection; explicit reload and successful apply establish a new baseline. README documents the behavior; this is release-note context for a future landing.
+- Green: all 19 model tests passed, including four new parameter cases covering unchanged/changed recovery and clean/explicit-discard behavior. Evidence: `.build/DraftPreservation/green.log`.
+- Full verification: `make check` and `make test-strict` passed with 98 unit tests, four adapter tests, 22 tooling tests, 20 unchanged snapshots, Debug build, static analysis and actual read-only CLI checks. Fresh scoped coverage: 993/1,016 (97.74%). Logs: `.build/DraftPreservation/check.log` and `strict.log`; coverage: `.build/Coverage/unit-7y847md4/`. Xcode's no-AppIntents metadata warning remains non-fatal. SwiftFormat and diff whitespace checks passed.
+- Signed-helper, manual packaged-app/accessibility and physical gates remain open. No helper registration, real schedule/grant changes, commit, push or publication; the earlier notarized candidate predates this fix.

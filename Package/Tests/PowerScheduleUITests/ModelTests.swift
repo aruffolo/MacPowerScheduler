@@ -12,12 +12,21 @@ private struct UnavailableHelper: HelperCalling {
 
 private actor ChangingReader {
     var snapshot = ScheduleSnapshot()
-    func read() -> ScheduleSnapshot {
-        snapshot
+    var failure: ScheduleError?
+    func read() throws -> ScheduleSnapshot {
+        if let failure {
+            throw failure
+        }
+        return snapshot
     }
 
     func update(_ new: ScheduleSnapshot) {
         snapshot = new
+        failure = nil
+    }
+
+    func fail() {
+        failure = ScheduleError(.unreadableSchedule, "Temporary read failure")
     }
 }
 
@@ -127,7 +136,7 @@ private actor WorkingHelper: HelperCalling {
     @Test
     func `current values load and dirty edits survive external change`() async throws {
         let reader = ChangingReader()
-        let model = ScheduleModel(helper: UnavailableHelper(), platform: TestPlatform(), read: { await reader.read() })
+        let model = ScheduleModel(helper: UnavailableHelper(), platform: TestPlatform(), read: { try await reader.read() })
         await model.refresh()
         model.startupEnabled = true
         let external = try ScheduleSnapshot(
@@ -143,5 +152,60 @@ private actor WorkingHelper: HelperCalling {
         #expect(model.notice == nil)
         #expect(model.startupEnabled == false)
         #expect(model.shutdownEnabled)
+    }
+
+    @Test(arguments: [false, true])
+    func `unsaved time survives failed refresh and recovery`(_ externalChange: Bool) async throws {
+        let reader = ChangingReader()
+        let initial = try ScheduleSnapshot(startup: PowerEvent(kind: .wakeorpoweron, time: ClockTime("07:30")))
+        await reader.update(initial)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .gmt
+        let model = ScheduleModel(helper: WorkingHelper(), platform: TestPlatform(), read: { try await reader.read() }, calendar: calendar)
+        await model.refresh()
+        let draftTime = try #require(calendar.date(bySettingHour: 8, minute: 0, second: 0, of: model.startupTime))
+        model.startupTime = draftTime
+        try #require(model.isDirty)
+
+        await reader.fail()
+        await model.refresh()
+        #expect(model.current == nil)
+        #expect(model.canApply == false)
+        #expect(model.error == "Temporary read failure")
+        #expect(model.startupTime == draftTime)
+        #expect(model.isDirty)
+        #expect(model.editRevision == initial.revision)
+
+        let recovered = externalChange ? ScheduleSnapshot() : initial
+        await reader.update(recovered)
+        await model.refresh()
+        #expect(model.current == recovered)
+        #expect(model.error == nil)
+        #expect(model.startupEnabled)
+        #expect(model.startupTime == draftTime)
+        #expect(model.isDirty)
+        #expect(model.editRevision == initial.revision)
+        #expect(model.hasConflict == externalChange)
+        #expect(model.canApply == !externalChange)
+    }
+
+    @Test(arguments: [false, true])
+    func `recovery reloads clean or explicitly discarded edits`(_ discardDraft: Bool) async throws {
+        let reader = ChangingReader()
+        let model = ScheduleModel(helper: WorkingHelper(), platform: TestPlatform(), read: { try await reader.read() })
+        await model.refresh()
+        model.startupEnabled = discardDraft
+        await reader.fail()
+        await model.refresh(discardDraft: discardDraft)
+        let recovered = try ScheduleSnapshot(shutdown: PowerEvent(kind: .shutdown, time: ClockTime("23:00")))
+        await reader.update(recovered)
+        await model.refresh(discardDraft: discardDraft)
+        #expect(model.current == recovered)
+        #expect(model.startupEnabled == false)
+        #expect(model.shutdownEnabled)
+        #expect(model.isDirty == false)
+        #expect(model.hasConflict == false)
+        #expect(model.editRevision == recovered.revision)
+        #expect(model.canApply)
     }
 }

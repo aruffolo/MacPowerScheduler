@@ -44,6 +44,8 @@ Move a properly signed distribution to `/Applications` before enabling its helpe
 
 Enable startup and/or shutdown, choose times, and apply. Both disabled clears the repeating schedule only. Existing weekday or alternate-event schedules are displayed accurately and require explicit replacement before conversion to daily. External changes invalidate stale edits. Times follow the Mac's local clock; macOS owns DST execution behavior.
 
+Unsaved editor changes survive temporary schedule-read failures. Apply stays disabled until a successful refresh; if the system schedule changed meanwhile, use **Reload Editor** to explicitly discard the draft and review the current settings.
+
 The helper changes system configuration on demand. Neither the GUI nor CLI needs to remain open for the configured schedule to persist. There is only one system-wide repeating pair; other tools can change the same pair.
 
 ## CLI and automation
