@@ -5,13 +5,15 @@
 - Targets `R2` from [plan.md](plan.md), implementation authorized 2026-09-27.
 - Derived active phase/task: `P3` / `VAL-GUI`, replace UI automation with fixed-fixture snapshots under the user-approved R2 contract; P0 signed-helper integration remains open.
 - Earlier phase signed runtime gates remain open; see [progress.md](progress.md).
-- Updated: 2026-09-27.
+- Updated: 2026-09-28.
 
 ## Canonical references
 
 Requirements: [prompt.md](prompt.md). Contracts, validations and guardrails: [plan.md](plan.md). Decisions: [documentation.md](documentation.md). Boundaries: [architecture overview](../../architecture/overview.md). Evidence and blockers: [progress.md](progress.md).
 
 ## Current execution sequence
+
+Current request: the maintainer reports successful testing on this Mac and has selected open PR submissions without a prerequisite issue. README and CONTRIBUTING.md are prepared for the explicitly authorized local documentation commit; the 2026-09-28 progress receipt records the documentation checks. The earlier validation sequence below retains its detailed evidence requirements; the maintainer's high-level report does not supply a new artifact hash or itemized matrix.
 
 1. R2 snapshot replacement is complete: twenty reviewed light/dark images pass; `make check` and `make test-strict` passed. The subsequent draft-preservation fix passed TDD red/green verification and both full gates with 98 unit tests and 97.74% scoped coverage; snapshots remain excluded from its numerator. Negative checks proved missing/mismatched references fail without recording. Review fixed inherited recording mode and stale runner guidance; the strict suite includes 22 tooling tests. See the R2 and draft-preservation receipts in progress for logs and counts.
    The next work is the approved isolated installed-helper setup. Packaged launch, foreground refresh, keyboard/VoiceOver, text sizing and confirmation/cancellation remain manual release checks. Earlier off-console runner failures are historical R1 evidence, superseded by the user's explicit R2 gate replacement.

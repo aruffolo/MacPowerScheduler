@@ -2,16 +2,17 @@
 
 ## Resume Here
 
+- Current request (2026-09-28): maintainer reports testing complete and the app working on this Intel Mac mini / macOS 15.7.4; improve the public README and contributor guidance. PRs of any size are welcome without an issue first. See the documentation receipt below; earlier detailed validation entries retain their original evidence scope.
 - Overall execution status: application implemented; earlier signed/notarized candidate verified. R2 snapshot replacement passed check/strict gates with 20 reviewed images; installed-helper, manual UI and physical gates remain open.
 - Latest correction: editor drafts survive read failures; TDD reproduction and fix verified with fresh check/strict gates (98 unit tests, 97.74% scoped coverage). See the draft-preservation receipt below.
 - Plan revision observed: `R2`, user-approved replacement of app UI automation with Point-Free snapshots on 2026-09-27.
 - Execution mode: supervised; Goal mode not enabled.
 - Active phase/task: `P3` / `VAL-GUI`, automated snapshot/model evidence complete; manual packaged-app/accessibility and signed production checks remain.
-- Next action: agree on the isolated installed-helper test setup, then execute its attended trust/lifecycle matrix; no live mutation is authorized by the snapshot work.
+- Next action: resume the outstanding attended validation gates after the authorized local documentation and Settings alignment commits. Repository and release publication remain separately gated.
 - Dependencies: snapshots no longer use an XCTest app automation runner. Signed-helper and attended power tests still need their approved environment. Earlier off-console failure remains historical evidence under R1.
 - Working tree: initial local source checkpoint authorized and prepared; no pushes or publication. See the initial-commit receipt below.
 - Host schedule: no helper registration, grant creation, schedule mutation or physical power test authorized by this work.
-- Updated: 2026-09-27.
+- Updated: 2026-09-28.
 
 Native LLVM selected-file HTML/text/JSON remains available through `make coverage-report` for unchanged retained inputs. Current source changes require fresh coverage; earlier receipts below remain historical evidence.
 
@@ -302,3 +303,17 @@ Project/workspace/scheme regeneration is hash-stable. Python sources compile and
 - Green: all 19 model tests passed, including four new parameter cases covering unchanged/changed recovery and clean/explicit-discard behavior. Evidence: `.build/DraftPreservation/green.log`.
 - Full verification: `make check` and `make test-strict` passed with 98 unit tests, four adapter tests, 22 tooling tests, 20 unchanged snapshots, Debug build, static analysis and actual read-only CLI checks. Fresh scoped coverage: 993/1,016 (97.74%). Logs: `.build/DraftPreservation/check.log` and `strict.log`; coverage: `.build/Coverage/unit-7y847md4/`. Xcode's no-AppIntents metadata warning remains non-fatal. SwiftFormat and diff whitespace checks passed.
 - Signed-helper, manual packaged-app/accessibility and physical gates remain open. No helper registration, real schedule/grant changes, commit, push or publication; the earlier notarized candidate predates this fix.
+
+### 2026-09-28 — Public README and contributor guidance
+
+- Maintainer reports tests completed successfully on this Mac. Confirmed the host remains Intel / macOS 15.7.4; the existing hardware record identifies the Mac mini. This is a maintainer-reported functional result, not a new agent-executed trust/lifecycle/power matrix or release-artifact validation.
+- Rewrote README around capabilities, an existing synthetic screenshot, setup, CLI use, limitations, removal, source builds, and license. Moved detailed development workflow out of the introduction and preserved signing/automation/removal explanations. No download URL or published-release claim was invented; this checkout has no origin remote.
+- Maintainer selected an open contribution policy: accept PR submissions freely, including substantial features, without requiring an issue first. Added CONTRIBUTING.md with build/signing instructions, check commands, snapshot-environment limitations, review expectations, project structure, and repository maintenance. Submission does not promise acceptance; no required AI tooling was introduced.
+- Documentation validation passed local-link/image-path checks, Make-target checks, code-fence balance, and diff whitespace checks. Application code, snapshots, build configuration, and dependencies are unchanged; the previous passing check/strict evidence remains applicable and suites were not rerun for this documentation-only change.
+- No commit, push, publication, helper operation, or power-schedule change performed.
+
+### 2026-09-28 — Local documentation commit authorization
+
+- User explicitly requested committing all pending work and leaving Git clean, with separate commits where appropriate. The README rewrite, CONTRIBUTING.md and their planning notes form one documentation change; the Settings refresh alignment fix is separate.
+- Rechecked README/CONTRIBUTING local links and screenshot paths, documented Make targets and code-fence balance against the current checkout. All pass. No external publication or live system operation is included.
+- Pre-commit Codex autoreview covered the complete pending text changes and returned no actionable findings. The concurrent Settings fix also passed fresh `make check` and `make test-strict`; its separate evidence receipt lives in the Quiet Agenda progress file. Local commit authorization does not close the outstanding attended release gates.
