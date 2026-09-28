@@ -15,7 +15,7 @@ Requirements: [prompt.md](prompt.md). Contracts, validations and guardrails: [pl
 
 The draft-preservation fix, Quiet Agenda/Deep Sapphire UI, Settings alignment, README and contributor guidance are committed. The maintainer reports successful functional testing on this Mac. Snapshot replacement and palette implementation are finished, not active tasks.
 
-For a future authorized binary-release task:
+For the authorized Universal and arm64 binary-release task:
 
 1. Reconcile existing maintainer results with the named signed-helper, account-authorization, lifecycle and physical-power matrices. Record the actual tested build and scope; collect missing cases without treating a broad success report as either no testing or proof of every case.
 2. Complete the specific remaining UI evidence in the [Quiet Agenda runbook](../quiet-agenda-ui/implement.md), including attended VoiceOver speech and Escape dismissal. Keep deterministic snapshots separate from interaction and hardware proof.
@@ -28,4 +28,4 @@ Live helper, account and power checks require the approved setup and applicable 
 
 ## Before stopping
 
-Update progress with actual outcomes, evidence gaps and a concrete next action. Preserve historical receipts and distinguish maintainer reports from agent-executed checks. The maintainer authorized a local commit of this documentation reconciliation; push, publication and live system operations remain outside this task.
+Update progress with actual outcomes, evidence gaps and a concrete next action. Preserve historical receipts and distinguish maintainer reports from agent-executed checks. The maintainer authorized both app release variants and explicitly approved their Apple notarization uploads. Repository public visibility and new live helper/power operations remain separate decisions.
