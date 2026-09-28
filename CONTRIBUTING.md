@@ -38,7 +38,7 @@ make test-strict
 
 `make check` runs lint, fresh unit coverage, adapter/tooling/snapshot tests, a Debug build, and static analysis. `make test-strict` runs the test suites and the built CLI's read-only subprocess checks. Default tests never install the helper, change the real power schedule, or shut down the machine.
 
-Pull requests are intended to run the same gates in [GitHub Actions](docs/testing/ci.md), plus the universal build check. The workflow's initial hosted verification and branch protection are still pending; snapshot environment differences remain failures requiring review.
+Pull requests run the same gates in [GitHub Actions](docs/testing/ci.md), plus the universal build check. See that page for hosted validation and branch-protection status. Snapshot environment differences remain failures requiring review.
 
 For focused work:
 

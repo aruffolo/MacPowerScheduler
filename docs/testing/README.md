@@ -14,6 +14,8 @@ Baseline environment: Intel macOS 15.7.4, Xcode 26.3 / Swift 6.2.4, content capt
 
 There is no app UI automation target, generated runner, UI Automation authorization step or runner provisioning command. Snapshots do not launch the packaged app. Before release, manually verify the signed packaged app launches, refreshes on foreground, supports keyboard/VoiceOver, and presents/cancels confirmations correctly. Privileged interactions still require the separately approved installed-helper setup.
 
+The same unchanged references also passed all 50 cases on GitHub's Intel macOS 15.7.9 / Xcode 26.3 image. See [CI evidence and environment policy](ci.md); this hosted validation does not change the original recording provenance.
+
 ## Coverage
 
 See [unit scope, exclusions, measurement and Apple/Swift guidance](unit-coverage.md). `make test-unit` excludes real process/filesystem tests and snapshots; `make test-adapters` runs those separately. All three layers remain mandatory through `make check` and `make test-strict`. `make test-coverage` reports scoped and whole-package execution separately, and fails on unclassified production package files or missing coverage data.

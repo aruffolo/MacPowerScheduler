@@ -10,7 +10,9 @@ Logs, coverage summaries and failed snapshot images are retained for seven days.
 
 The current reviewed references were recorded on Intel macOS 15.7.4 with Xcode 26.3. GitHub updates the OS behind `macos-15-intel`; selecting that label does not pin an exact OS patch or runner image. CI logs the actual OS/toolchain/image, and uses unchanged references with recording disabled.
 
-The first hosted run must establish whether those references reproduce. An environment mismatch remains a failed check. Inspect the failure images before proposing an explicitly reviewed baseline migration; never automatically record references or relax comparison tolerance. A hosted CI pass does not prove physical startup, helper authorization or accessibility behavior. See the [validation procedures](README.md).
+The [first hosted run](https://github.com/aruffolo/MacPowerScheduler/actions/runs/36434752282) passed all three Make gates at `9385c35` on Intel macOS 15.7.9, Xcode 26.3 / Swift 6.2.4, image `20260824.0482.1`. All 50 snapshot cases matched the unchanged references, and scoped coverage was 97.80%. The artifact action was subsequently updated to v7.0.1 to use its supported Node 24 runtime; see [workflow runs](https://github.com/aruffolo/MacPowerScheduler/actions/workflows/ci.yml) for results at each later revision.
+
+An environment mismatch remains a failed check. Inspect failure images before proposing an explicitly reviewed baseline migration; never automatically record references or relax comparison tolerance. A hosted CI pass does not prove physical startup, helper authorization or accessibility behavior. See the [validation procedures](README.md).
 
 ## Recommended protection for main
 
@@ -23,4 +25,4 @@ Enable a repository ruleset after the workflow has completed successfully on Git
 
 Do not enable the required check before validating its actual emitted name and first successful run. Otherwise a configuration mistake can block every merge. Additional approval requirements can be added when another active maintainer is available. Branch protection is repository configuration; adding this file does not enable it.
 
-Hosted verification and protection are pending until the repository is connected and the workflow is published. Local checks alone cannot establish that either is working.
+The workflow is published to the private `aruffolo/MacPowerScheduler` repository and has completed a successful hosted run. The observed check name is `macOS validation`, from the `github-actions` app (ID 15368). GitHub currently rejects ruleset access for this private repository with an upgrade-to-Pro requirement, so protection is not enabled. Enable the ruleset after either an account upgrade or a separately authorized switch to public visibility; repository visibility remains private until that separate decision.
