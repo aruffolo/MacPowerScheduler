@@ -12,6 +12,10 @@ Accepted by the maintainer's “ok” after the placement discussion. Required s
 
 ## Implementation interpretations
 
+### Window sizing follow-up — Fit content on the current display
+
+The maintainer requested enough window space to avoid scroll indicators and explicitly selected both the main window and Settings, with scrolling retained when content cannot fit the display. Heights now follow SwiftUI's intrinsic content size, capped by the current screen's usable area and native window chrome; a Settings sheet also accounts for its attachment point. The main window remains horizontally resizable. Normal content hides scrollbars, including legacy scrollers; long messages and constrained displays retain native scrolling. This supersedes the fixed 684-point initial main content and 580-point Settings height as acceptance dimensions. The design tokens and scheduling behavior remain unchanged.
+
 ### Icon follow-up — Precision Power
 
 The maintainer selected option 2 from the revised Apple-inspired icon proposals and supplied the resized artwork in `AppIcons.zip`. The canonical asset is `App/AppIcon.icon`, with the archive's unmasked 1024px sRGB artwork and Icon Composer configuration. Xcode generates the mask and earlier-macOS renditions; the obsolete teal drawing script and legacy catalog are removed. This is flattened artwork in an Icon Composer bundle, not separately authored glass layers.

@@ -22,8 +22,10 @@ struct ScheduleSettingsView: View {
                 .padding(28)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .scrollBounceBehavior(.basedOnSize)
         }
-        .frame(width: 520, height: 580)
+        .frame(width: 520)
+        .contentFittingWindow()
         .background(AgendaPalette(scheme: colorScheme).surface)
         .tint(AgendaPalette(scheme: colorScheme).accent)
         .confirmationDialog("Allow automation for this account?", isPresented: $confirmAutomation, titleVisibility: .visible) {

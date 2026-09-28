@@ -31,9 +31,11 @@ struct ScheduleContentView: View {
             .padding(.horizontal, 46).padding(.top, 28).padding(.bottom, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom, spacing: 0) { ScheduleFooter(model: model, apply: apply) }
         .background(palette.surface)
-        .frame(minWidth: 520, minHeight: 620)
+        .frame(minWidth: 520)
+        .contentFittingWindow()
         .tint(palette.accent)
         .toolbar { settingsToolbar }
         .sheet(isPresented: $settingsPresented) { ScheduleSettingsView(model: model) }

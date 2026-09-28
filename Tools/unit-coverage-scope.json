@@ -23,6 +23,7 @@
     "PowerScheduleUI/SchedulingSetup.swift"
   ],
   "integration": {
+    "PowerScheduleUI/ContentFittingWindow.swift": "SwiftUI intrinsic sizing and AppKit screen/sheet geometry; synthetic hosted layout and snapshots plus native window checks.",
     "PowerScheduleSystem/BoundedProcess.swift": "Real Foundation process, pipe, signal and timeout behavior; safe process adapter suite.",
     "PowerScheduleSystem/LiveSystemSchedule.swift": "Fixed pmset path, effective UID and system preference file I/O; approved live helper/system tests.",
     "PowerScheduleIPC/XPCTransport.swift": "Real NSXPC connection, signed peers, interruption and timeout wiring; signed integration probes.",

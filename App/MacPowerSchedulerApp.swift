@@ -9,6 +9,6 @@ struct MacPowerSchedulerApp: App {
         }
         .defaultSize(width: 580, height: 684)
         .windowToolbarStyle(.unifiedCompact(showsTitle: false))
-        .windowResizability(.contentMinSize)
+        .windowResizability(.contentSize)
     }
 }
