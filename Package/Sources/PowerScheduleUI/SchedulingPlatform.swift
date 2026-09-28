@@ -1,5 +1,9 @@
 import Foundation
 
+public enum HelperRegistration: Sendable {
+    case notRegistered, enabled, requiresApproval, notFound
+}
+
 /// Keeps the system authorization alive until the helper has consumed its external form.
 @MainActor public struct AuthorizationLease {
     public let externalForm: Data
@@ -12,7 +16,8 @@ import Foundation
 
 @MainActor public protocol SchedulingPlatform {
     var signingReady: Bool { get }
-    var requiresApproval: Bool { get }
+    var registration: HelperRegistration { get }
+    func openSystemSettings()
     func register() throws
     func unregister() async throws
     func authorize() async throws -> AuthorizationLease

@@ -19,7 +19,8 @@
     "PowerScheduleService/HelperRequestHandler.swift",
     "PowerScheduleService/GrantStoragePolicy.swift",
     "PowerScheduleUI/ScheduleModel.swift",
-    "PowerScheduleUI/SchedulingPlatform.swift"
+    "PowerScheduleUI/SchedulingPlatform.swift",
+    "PowerScheduleUI/SchedulingSetup.swift"
   ],
   "integration": {
     "PowerScheduleSystem/BoundedProcess.swift": "Real Foundation process, pipe, signal and timeout behavior; safe process adapter suite.",
@@ -31,6 +32,13 @@
     "PowerScheduleService/HelperServer.swift": "NSXPC listener and trusted peer UID capture; signed listener integration tests.",
     "PowerScheduleUI/MacSchedulingPlatform.swift": "SMAppService registration, system approval and authorization composition; attended lifecycle integration tests.",
     "PowerScheduleUI/PowerScheduleView.swift": "SwiftUI lifecycle wiring; manual packaged-app launch and foreground checks. Editor decisions are measured in ScheduleModel.",
-    "PowerScheduleUI/ScheduleContentView.swift": "SwiftUI rendering and control wiring; Point-Free image snapshots plus manual interaction/accessibility validation. Editor decisions are measured in ScheduleModel."
+    "PowerScheduleUI/ScheduleContentView.swift": "SwiftUI rendering and control wiring; Point-Free image snapshots plus manual interaction/accessibility validation. Editor decisions are measured in ScheduleModel.",
+    "PowerScheduleUI/AgendaEventRow.swift": "SwiftUI agenda layout and bindings; synthetic snapshots and native control checks.",
+    "PowerScheduleUI/AgendaTimePicker.swift": "AppKit date-picker rendering, focus and binding bridge; hosted snapshots and native keyboard/accessibility checks.",
+    "PowerScheduleUI/AgendaPalette.swift": "Appearance-dependent SwiftUI colors; light and dark snapshots.",
+    "PowerScheduleUI/SavedScheduleView.swift": "SwiftUI saved-event rendering; snapshots include daily and non-daily schedules.",
+    "PowerScheduleUI/ScheduleFooter.swift": "SwiftUI status and action rendering; state snapshots and native keyboard checks. Apply decisions remain measured in ScheduleModel.",
+    "PowerScheduleUI/ScheduleSettingsView.swift": "SwiftUI Settings and confirmation presentation; synthetic snapshots and native sheet checks. Privileged lifecycle remains separately gated.",
+    "PowerScheduleUI/ScheduleSetupBanner.swift": "SwiftUI readiness presentation; snapshots plus measured SchedulingSetup and ScheduleModel decisions."
   }
 }

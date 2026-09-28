@@ -6,7 +6,8 @@ import Testing
 
 @MainActor private final class ModelPlatform: SchedulingPlatform {
     var signingReady = true
-    var requiresApproval = false
+    var registration: HelperRegistration = .enabled
+    func openSystemSettings() {}
     var failure: String?
     var registrations = 0
     var removals = 0
@@ -74,7 +75,7 @@ private actor ModelHelper: HelperCalling {
         let helper = ModelHelper()
         await helper.update(HelperResponse(error: ScheduleError(.helperUnavailable, "offline")))
         let platform = ModelPlatform()
-        platform.requiresApproval = pendingApproval
+        platform.registration = pendingApproval ? .requiresApproval : .enabled
         let model = ScheduleModel(helper: helper, platform: platform, read: { ScheduleSnapshot() }, calendar: calendar)
         await model.refresh()
         #expect(!model.helperReady)
@@ -217,6 +218,7 @@ private actor ModelHelper: HelperCalling {
         #expect(model.busy)
         await model.refresh()
         await model.enableHelper()
+        await model.performSetupAction()
         await model.apply()
         await model.setAutomation(true)
         await model.removeHelper()

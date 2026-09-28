@@ -7,8 +7,18 @@ import ServiceManagement
         (try? SigningPolicy.teamIdentifier()) != nil
     }
 
-    public var requiresApproval: Bool {
-        SMAppService.daemon(plistName: ServiceIdentity.plist).status == .requiresApproval
+    public var registration: HelperRegistration {
+        switch SMAppService.daemon(plistName: ServiceIdentity.plist).status {
+        case .notRegistered: .notRegistered
+        case .enabled: .enabled
+        case .requiresApproval: .requiresApproval
+        case .notFound: .notFound
+        @unknown default: .notFound
+        }
+    }
+
+    public func openSystemSettings() {
+        SMAppService.openSystemSettingsLoginItems()
     }
 
     public func register() throws {

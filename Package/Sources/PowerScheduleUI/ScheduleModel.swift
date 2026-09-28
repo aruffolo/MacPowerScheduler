@@ -15,9 +15,8 @@ public final class ScheduleModel {
     public private(set) var notice: String?
     public private(set) var busy = false
     public private(set) var automationEnabled = false
-    public private(set) var helperReady = false
+    public private(set) var setup: SchedulingSetup = .checking
     public private(set) var signingReady = false
-    public private(set) var permissionDescription = "Power scheduling needs setup."
     private var draftBaseline: ScheduleSnapshot?
     private let platform: any SchedulingPlatform
     private let helper: any HelperCalling
@@ -42,6 +41,14 @@ public final class ScheduleModel {
 
     public var editRevision: String? {
         draftBaseline?.revision
+    }
+
+    public var helperReady: Bool {
+        setup == .ready
+    }
+
+    public var permissionDescription: String {
+        setup.message
     }
 
     public var needsReplacement: Bool {
@@ -81,7 +88,7 @@ public final class ScheduleModel {
         draftBaseline = snapshot
     }
 
-    private func date(_ time: ClockTime) -> Date {
+    func date(_ time: ClockTime) -> Date {
         calendar.date(
             from: DateComponents(year: 2001, month: 1, day: 1, hour: time.hour, minute: time.minute),
         )
@@ -115,23 +122,33 @@ public final class ScheduleModel {
     private func refreshPermission() async {
         signingReady = platform.signingReady
         guard signingReady else {
-            helperReady = false
             automationEnabled = false
-            permissionDescription = "Read-only development build. Sign the app to enable scheduling."
+            setup = .readOnly
             return
         }
         do {
             let response = try await helper.call(HelperRequest(action: .status)).checked()
-            helperReady = true
+            setup = .ready
             automationEnabled = response.automationEnabled ?? false
-            permissionDescription = "Power scheduling is enabled."
         } catch {
-            helperReady = false
             automationEnabled = false
-            let needsApproval = platform.requiresApproval
-            permissionDescription =
-                needsApproval
-                    ? "Approve Power Scheduling in System Settings → Login Items." : error.localizedDescription
+            switch platform.registration {
+            case .notRegistered: setup = .registrationRequired
+            case .requiresApproval: setup = .approvalRequired
+            case .enabled: setup = .unavailable(error.localizedDescription)
+            case .notFound:
+                setup = .unavailable("The scheduling helper could not be found. Reopen or reinstall the signed app, then try again.")
+            }
+        }
+    }
+
+    public func performSetupAction() async {
+        guard !busy else { return }
+        switch setup {
+        case .registrationRequired: await enableHelper()
+        case .approvalRequired: platform.openSystemSettings()
+        case .unavailable: await refresh()
+        case .checking, .readOnly, .ready: break
         }
     }
 
@@ -210,8 +227,7 @@ public final class ScheduleModel {
             ).checked()
             automationEnabled = false
             try await platform.unregister()
-            helperReady = false
-            permissionDescription = "Power scheduling helper removed."
+            setup = .registrationRequired
             notice =
                 "Existing system schedules are unchanged. Disable both times and Apply before removal if you want them cleared."
         } catch { self.error = error.localizedDescription }

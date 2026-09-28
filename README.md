@@ -34,15 +34,15 @@ By default the app is ad-hoc signed and offers read-only schedule inspection. It
 
 `make check` enforces at least 95% executable-line coverage of [the declared unit-testable logic](docs/testing/unit-coverage.md). `make test-unit` runs deterministic tests, `make test-adapters` exercises safe process/filesystem boundaries, and `make test-coverage` produces fresh LLVM HTML/text/JSON reports under `.build/Coverage/`. `make coverage-report` regenerates reports from unchanged saved inputs without rerunning tests. Signed-helper, UI and physical power validation remain separate requirements.
 
-`make test-snapshots` compares twenty SwiftUI reference images using the approved test-only Point-Free SnapshotTesting dependency. Both full test gates require snapshots. Use `make record-snapshots` only for intentional, visually reviewed reference changes. See [snapshot workflow and baseline environment](docs/testing/README.md#swiftui-snapshots); no UI automation runner provisioning is required. Packaged-app launch and interactions remain manual release checks.
+`make test-snapshots` compares fifty SwiftUI reference images using the approved test-only Point-Free SnapshotTesting dependency. Both full test gates require snapshots. Use `make record-snapshots` only for intentional, visually reviewed reference changes. See [snapshot workflow and baseline environment](docs/testing/README.md#swiftui-snapshots); no UI automation runner provisioning is required. Packaged-app launch and interactions remain manual release checks.
 
 For privileged source builds, create the ignored `Configurations/Local.xcconfig` with your `DEVELOPMENT_TEAM` and `CODE_SIGN_IDENTITY`. Sign all three executables with the same Apple Development or Developer ID team. Do not commit this file. Contributor helper installation still requires macOS approval and must be validated with your signing configuration; ad-hoc and unsigned executables remain read-only. Release builds additionally require Developer ID/notarization; see [release procedure](docs/release/README.md).
 
 ## Using the app
 
-Move a properly signed distribution to `/Applications` before enabling its helper. Open the app, select **Enable Power Scheduling**, and approve the system-managed request in System Settings if needed. The app never receives your administrator password.
+Move a properly signed distribution to `/Applications` before enabling its helper. Open the app, select **Enable Power Scheduling** in the setup banner or **Settings** (the top-right gear, also Command-comma), and use **Open System Settings** if macOS approval is needed. The app never receives your administrator password.
 
-Enable startup and/or shutdown, choose times, and apply. Both disabled clears the repeating schedule only. Existing weekday or alternate-event schedules are displayed accurately and require explicit replacement before conversion to daily. External changes invalidate stale edits. Times follow the Mac's local clock; macOS owns DST execution behavior.
+The Quiet Agenda editor uses a Deep Sapphire accent and shows actual saved times under **Saved on this Mac**, separately from unsaved edits. Enable startup and/or shutdown, choose times, and select **Apply Schedule**. Both disabled clears the repeating schedule only. Existing weekday or alternate-event schedules are displayed accurately and require explicit replacement before conversion to daily. External changes invalidate stale edits. Times follow the Mac's local clock; macOS owns DST execution behavior.
 
 Unsaved editor changes survive temporary schedule-read failures. Apply stays disabled until a successful refresh; if the system schedule changed meanwhile, use **Reload Editor** to explicitly discard the draft and review the current settings.
 
@@ -55,13 +55,13 @@ The helper changes system configuration on demand. Neither the GUI nor CLI needs
 /Applications/MacPowerScheduler.app/Contents/MacOS/powerschedulectl set --startup 07:30 --shutdown 23:00
 ```
 
-Writes require the app's explicit **Allow Automation** grant for the calling account. This allows other processes under that account to invoke the CLI; revoke it in the app when no longer needed. The CLI never prompts interactively or enables its own grant. See the [CLI schema, commands, errors, and conflict behavior](docs/cli.md).
+Writes require the explicit **Allow Automation…** grant in **Settings** for the calling account. This allows other processes under that account to invoke the CLI; revoke it in the app when no longer needed. The CLI never prompts interactively or enables its own grant. See the [CLI schema, commands, errors, and conflict behavior](docs/cli.md).
 
 ## Limitations and removal
 
 Normal scheduled shutdown can be blocked by sleep, no logged-in user, or unsaved documents. There is no force-shutdown fallback. Power-on needs connected power and compatible hardware; FileVault may require a person to unlock the Mac before services become reachable. The app does not alter FileVault, automatic login, or networking. See [Apple's scheduling guidance](https://support.apple.com/guide/mac-help/schedule-your-mac-to-turn-on-or-off-mchl40376151/mac).
 
-**Remove Helper** revokes automation grants for all accounts and unregisters the helper. System schedules remain active: if you want to clear the repeating schedule, disable both times and Apply before removing the helper. One-time events are never cleared. Deleting the app manually does not perform this cleanup; reinstall a matching signed app to use the removal flow. Disabling the helper in System Settings prevents it from running but does not itself erase stored automation grants.
+**Settings → Remove Helper…** revokes automation grants for all accounts and unregisters the helper. System schedules remain active: if you want to clear the repeating schedule, disable both times and Apply before removing the helper. One-time events are never cleared. Deleting the app manually does not perform this cleanup; reinstall a matching signed app to use the removal flow. Disabling the helper in System Settings prevents it from running but does not itself erase stored automation grants.
 
 ## Project and license
 

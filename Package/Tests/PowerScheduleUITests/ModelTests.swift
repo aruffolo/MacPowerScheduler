@@ -32,7 +32,8 @@ private actor ChangingReader {
 
 @MainActor private final class TestPlatform: SchedulingPlatform {
     var signingReady = true
-    var requiresApproval = false
+    var registration: HelperRegistration = .enabled
+    func openSystemSettings() {}
     var authorized = 0
     var registered = false
     var removed = false

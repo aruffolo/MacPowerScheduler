@@ -7,7 +7,8 @@ struct MacPowerSchedulerApp: App {
         Window("MacPowerScheduler", id: "schedule") {
             PowerScheduleView()
         }
-        .defaultSize(width: 560, height: 710)
+        .defaultSize(width: 580, height: 684)
+        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
         .windowResizability(.contentMinSize)
     }
 }

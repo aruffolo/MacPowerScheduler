@@ -15,9 +15,11 @@ private struct NoGrantHelper: HelperCalling {
         true
     }
 
-    var requiresApproval: Bool {
-        false
+    var registration: HelperRegistration {
+        .enabled
     }
+
+    func openSystemSettings() {}
 
     func register() {}
     func unregister() async {}
