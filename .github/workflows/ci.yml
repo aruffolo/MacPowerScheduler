@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: macOS validation
+    runs-on: macos-15-intel
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+      SNAPSHOT_ARTIFACTS: ${{ github.workspace }}/.build/CI/snapshots
+      MPS_RECORD_SNAPSHOTS: '0'
+    steps:
+      - name: Check out source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      - name: Prepare evidence and verify environment
+        run: |
+          mkdir -p .build/CI/snapshots
+          test "$(uname -m)" = x86_64
+          test ! -e Configurations/Local.xcconfig
+          {
+            sw_vers
+            xcodebuild -version
+            swift --version
+            python3 --version
+            printf 'Runner image: %s\n' "$ImageVersion"
+          } | tee .build/CI/environment.log
+          xcodebuild -version | grep -Fx 'Xcode 26.3'
+
+      - name: Install pinned lint and formatting tools
+        run: |
+          tools_dir="$RUNNER_TEMP/mps-ci-tools"
+          mkdir -p "$tools_dir/swiftlint" "$tools_dir/swiftformat"
+          curl --fail --location --retry 3 \
+            https://github.com/realm/SwiftLint/releases/download/0.65.1/portable_swiftlint.zip \
+            --output "$tools_dir/swiftlint.zip"
+          curl --fail --location --retry 3 \
+            https://github.com/nicklockwood/SwiftFormat/releases/download/0.63.0/swiftformat.zip \
+            --output "$tools_dir/swiftformat.zip"
+          printf '%s  %s\n' \
+            c1e429b0599cf1b516f369a2d9ec04eaf0e436f3c12b637df8851fa52ff694d0 "$tools_dir/swiftlint.zip" \
+            28c7802e11fa5ae113d903066439c6bb1be20a8ac1ad9709c42616a7e273fb0f "$tools_dir/swiftformat.zip" \
+            | shasum -a 256 --check
+          unzip -q "$tools_dir/swiftlint.zip" -d "$tools_dir/swiftlint"
+          unzip -q "$tools_dir/swiftformat.zip" -d "$tools_dir/swiftformat"
+          # Repository scripts deliberately prepend /usr/local/bin on Intel.
+          sudo install -m 755 "$tools_dir/swiftlint/swiftlint" /usr/local/bin/swiftlint
+          sudo install -m 755 "$tools_dir/swiftformat/swiftformat" /usr/local/bin/swiftformat
+          test "$(swiftlint version)" = 0.65.1
+          test "$(swiftformat --version)" = 0.63.0
+
+      - name: Check
+        run: make check 2>&1 | tee .build/CI/check.log
+
+      - name: Strict tests and CLI smoke
+        run: make test-strict 2>&1 | tee .build/CI/strict.log
+
+      - name: Verify universal build
+        run: make build-universal 2>&1 | tee .build/CI/universal.log
+
+      - name: Verify checks did not change tracked files
+        run: git diff --exit-code
+
+      - name: Retain validation evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-${{ github.run_id }}-${{ github.run_attempt }}
+          include-hidden-files: true
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            .build/CI/
+            .build/Coverage/latest.md
+            .build/Coverage/latest.json
+            .build/Coverage/unit-*/tests.log
+            .build/Coverage/unit-*/llvm.log
+            .build/Coverage/unit-*/summary.md

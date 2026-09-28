@@ -2,7 +2,7 @@
 
 ## Resume Here
 
-- Current request (2026-09-28): reconcile active documentation after the open-source readiness review. This section is the current project status; dated receipts below preserve their original scope.
+- Current request (2026-09-28): create a private GitHub repository, publish the CI workflow and verify hosted checks before enabling protection for `main`. Local workflow validation and all three Make gates passed; hosted verification is pending. Making the repository public remains a separate decision. This section is the current project status; dated receipts below preserve their original scope.
 - Source checkpoint: `3ba85ee`, including draft preservation (`8cbb629`), Quiet Agenda/Deep Sapphire (`d48cd36`), Settings refresh alignment (`16c722c`), and public README/contributor guidance (`3ba85ee`). PRs of any size are welcome without an issue first.
 - Automated validation: fresh `make check` and `make test-strict` passed at this checkpoint: 100 unit tests, 4 adapter tests, 22 tooling tests, 50 snapshot cases, build/static analysis and actual read-only CLI checks. Scoped unit coverage is 1024/1047 executable lines (97.80%); it excludes live integration and UI rendering. See the readiness-review receipt below.
 - Functional testing: the maintainer reports that testing is complete and the app works on this Intel Mac mini / macOS 15.7.4. This is successful maintainer-reported testing, not an itemized signed-peer, lifecycle or physical-power receipt. Do not describe that testing as unperformed or infer results for unreported cases or other hardware.
@@ -11,7 +11,7 @@
 - Execution mode: supervised; Goal mode not enabled.
 - Active phase/task: `P7` evidence reconciliation; implementation and automated UI work are complete, with detailed release proof still partial.
 - Next action for binary release: map available functional results to the named gates, collect only missing evidence in an approved setup, and build/verify a fresh signed/notarized candidate. Repository and release publication remain separately authorized actions.
-- Current documentation task: no app code or host settings changed; the maintainer authorized a local commit of this reconciliation. No new live test, push or publication authorized.
+- Documentation reconciliation was committed as `ca62f46`. The maintainer authorized creating a private repository and verifying CI there; task-scoped commits and pushes support that setup. Public visibility, binary release and live system operations remain outside this task.
 - Updated: 2026-09-28.
 
 Native LLVM selected-file HTML/text/JSON remains available through `make coverage-report` for unchanged retained inputs. A later source change requires fresh coverage; a documentation-only edit does not invalidate this checkpoint's measurement.
@@ -327,3 +327,11 @@ Project/workspace/scheme regeneration is hash-stable. Python sources compile and
 - Maintainer-reported functional success on this Intel Mac mini / macOS 15.7.4 remains valid evidence at its stated scope. This review performed no new helper registration, grant change, schedule mutation or power cycle. It did not create or validate a new release artifact.
 - Documentation reconciliation updates current status, committed-work references, UI routing and architecture guidance while retaining historical receipts. The approved current accent is Deep Sapphire. Detailed release matrices and the remaining attended UI checks are tracked as evidence gaps, not as a claim that the maintainer did no testing.
 - Documentation validation: all 31 local Markdown links/anchors across the nine changed files, rule-loading paths, code fences, file lengths and `git diff --check` passed. Application suites were not repeated for these documentation-only edits; the source checkpoint above is unchanged. No commit or push performed.
+
+### 2026-09-28 — Pull-request CI preparation
+
+- Added a hosted Intel macOS 15 / Xcode 26.3 workflow for PRs, main pushes and manual dispatch, running the existing check, strict and universal-build targets. Actions use verified upstream commit pins; lint/format tools use versioned archives with verified SHA-256 digests. Read-only token, no persisted checkout credentials, no release secrets or helper operations, and seven-day evidence retention.
+- Preserved current snapshot references and strict failure behavior. The hosted OS may differ from the recorded baseline; its first run must establish reproducibility or produce reviewed mismatch evidence. No hosted result is claimed.
+- Recommended main ruleset: PR required, zero mandatory approvals for the single maintainer, required up-to-date CI from GitHub Actions, resolved conversations, force-push/deletion blocks and no routine bypass. These settings are documented, not applied. Repository URL/creation choice is pending; no Git remote is configured.
+- Local workflow checks passed: actionlint 1.7.12, YAML and embedded Bash syntax, upstream archive checksums/layout/version execution, and failure propagation through the same Bash/tee pipeline used by Actions. Initial `make check` was blocked by compiler-cache sandbox access; the unchanged required targets were retried with approved access.
+- Fresh `make check`, `make test-strict` and `make build-universal` all passed locally. Scoped coverage remains 1024/1047 (97.80%); retained inputs are `.build/Coverage/unit-__vdjcdd/`. Logs are under `.build/CI-local/`, including the original sandbox failure and successful retry. Local builds retained the project's configured signing; this does not claim execution of the hosted ad-hoc configuration or certify a notarized release candidate.
