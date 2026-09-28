@@ -2,12 +2,12 @@
 
 ## Resume Here
 
-- Status: implementation delivered in the working tree; automated gates passed; attended accessibility/keyboard validation remains partial.
+- Status: Quiet Agenda and Deep Sapphire committed as `d48cd36`; Settings refresh alignment follow-up prepared; attended accessibility/keyboard validation remains partial.
 - Plan revision observed: `R2`; execution mode: supervised, no Goal mode.
 - Active phase/task: `P4` / final receipt, with open `VAL-INTERACTION` evidence from P1/P2.
 - Next action: attended VoiceOver speech and Escape dismissal checks on the signed build; reconcile SC-4/5 and final gate only after that evidence exists.
 - Blockers: native automation returns contradictory/stale focused-window receipts for keyboard events; screenshot observations verify some effects, but not Escape dismissal or spoken VoiceOver behavior. Destructive confirmation clicks remain outside authorization under ai-rules/tooling.md. Live operations remain separately gated.
-- Validated source: uncommitted implementation over `8cbb629`; final code/tests/reference hashes retained in `.build/QuietAgendaUI/validated-source-sha256.json`. Both required full suites passed; details below.
+- Validated source: `d48cd36` contains the implementation and palette verified in the receipts below. Follow-up Settings alignment validation is recorded separately; earlier source hashes remain historical evidence.
 - Working tree on entry: existing README.md, initial-release implement/progress edits, CONTRIBUTING.md and concept files. Preserved prior work; README received only the additional UI guidance changes described below.
 - Updated: 2026-09-28.
 
@@ -126,3 +126,11 @@ Pre-commit command: installed `autoreview --mode local --engine codex`, run in a
 `behavior-validator` / `peekaboo` palette pass used the prewritten `.build/QuietAgendaBlue/behavior-contract.md`, then only running-app images/accessibility and generated artifacts as evidence. Visible blue controls/footer, readable sun/moon/editor/saved rows, gear opening Settings and Done returning to the agenda passed. Enabled/disabled and dirty/error artifact probes passed. No mutation was invoked. Report: `behavior-report.md`; captures remain ignored. Existing VoiceOver speech, Escape and privileged-operation validation gaps remain out of this palette pass, not declared fixed. The latest built app is open with its actual saved schedule and no test draft.
 
 Local commit scope is the complete authorized Quiet Agenda UI plus selected blue palette, its tests/references, concept/design and feature-plan docs, coverage classifications and relevant README/testing guidance. The prior README rewrite is preserved through partial staging; CONTRIBUTING and initial-release planning edits are excluded. No push, publication or live schedule/grant change is authorized or performed.
+
+### Settings refresh alignment follow-up — 2026-09-28
+
+User reported the Refresh Status arrow sitting above its title and authorized fixing it, then committing all pending work with a clean working tree. The button now explicitly centers its icon and text together; the decorative icon is hidden from accessibility. The native button, busy-state disabling and refresh action are retained. Scope is Settings presentation and its fourteen light/dark references; the pending public documentation is a separate commit.
+
+All fourteen Settings references were regenerated and individually inspected, including setup, approval, read-only, error and unavailable states. Representative before/after images confirm the arrow moves into vertical alignment without shifting surrounding content. The generated-artifact validation contract/report and build logs are retained under `.build/RefreshAlignment/`. No helper, grant or power-schedule operation was performed; existing attended validation gaps remain open.
+
+Final `make check` and `make test-strict` both passed, including all 50 snapshots, deterministic/model and safe adapter/tooling tests, 97.80% scoped coverage, configured-signature Debug build/static analysis, and read-only CLI checks. The first sandboxed recording attempt was blocked from the Swift compiler cache; the authorized retry recorded fourteen cases with the expected record-mode failure, followed by the passing non-recording suites. `autoreview --mode local --engine codex` reviewed both commit groups in an isolated text-only checkout and returned no findings (exit 0); PNGs were reviewed separately as explicitly recorded in its hash manifest. Whitespace and documentation checks passed. Release-note context: center the Settings Refresh Status icon beside its title, retaining native control behavior. Local commits only; no push or publication.

@@ -61,8 +61,16 @@ struct ScheduleSettingsView: View {
             } else {
                 ScheduleSetupBanner(model: model)
             }
-            Button("Refresh Status", systemImage: "arrow.clockwise") { Task { await model.refresh() } }
-                .disabled(model.busy)
+            Button {
+                Task { await model.refresh() }
+            } label: {
+                HStack(alignment: .center, spacing: 6) {
+                    Image(systemName: "arrow.clockwise")
+                        .accessibilityHidden(true)
+                    Text("Refresh Status")
+                }
+            }
+            .disabled(model.busy)
         }
     }
 
