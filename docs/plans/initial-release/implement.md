@@ -2,30 +2,30 @@
 
 ## Runbook control
 
-- Targets `R2` from [plan.md](plan.md), implementation authorized 2026-09-27.
-- Derived active phase/task: `P3` / `VAL-GUI`, replace UI automation with fixed-fixture snapshots under the user-approved R2 contract; P0 signed-helper integration remains open.
-- Earlier phase signed runtime gates remain open; see [progress.md](progress.md).
+- Contract: `R2` from [plan.md](plan.md), implementation authorized 2026-09-27.
+- Active phase/task: `P7`, evidence reconciliation. Implementation and automated checks are complete; detailed binary-release proof remains partial.
+- Current source, counts, maintainer testing and remaining evidence: [progress.md — Resume Here](progress.md#resume-here). Keep that summary authoritative rather than duplicating it here.
 - Updated: 2026-09-28.
 
 ## Canonical references
 
-Requirements: [prompt.md](prompt.md). Contracts, validations and guardrails: [plan.md](plan.md). Decisions: [documentation.md](documentation.md). Boundaries: [architecture overview](../../architecture/overview.md). Evidence and blockers: [progress.md](progress.md).
+Requirements: [prompt.md](prompt.md). Contracts, validations and guardrails: [plan.md](plan.md). Decisions: [documentation.md](documentation.md). Boundaries: [architecture overview](../../architecture/overview.md). Current presentation: [Quiet Agenda decisions](../quiet-agenda-ui/documentation.md). Evidence: [progress.md](progress.md).
 
 ## Current execution sequence
 
-Current request: the maintainer reports successful testing on this Mac and has selected open PR submissions without a prerequisite issue. README and CONTRIBUTING.md are prepared for the explicitly authorized local documentation commit; the 2026-09-28 progress receipt records the documentation checks. The earlier validation sequence below retains its detailed evidence requirements; the maintainer's high-level report does not supply a new artifact hash or itemized matrix.
+The draft-preservation fix, Quiet Agenda/Deep Sapphire UI, Settings alignment, README and contributor guidance are committed. The maintainer reports successful functional testing on this Mac. Snapshot replacement and palette implementation are finished, not active tasks.
 
-1. R2 snapshot replacement is complete: twenty reviewed light/dark images pass; `make check` and `make test-strict` passed. The subsequent draft-preservation fix passed TDD red/green verification and both full gates with 98 unit tests and 97.74% scoped coverage; snapshots remain excluded from its numerator. Negative checks proved missing/mismatched references fail without recording. Review fixed inherited recording mode and stale runner guidance; the strict suite includes 22 tooling tests. See the R2 and draft-preservation receipts in progress for logs and counts.
-   The next work is the approved isolated installed-helper setup. Packaged launch, foreground refresh, keyboard/VoiceOver, text sizing and confirmation/cancellation remain manual release checks. Earlier off-console runner failures are historical R1 evidence, superseded by the user's explicit R2 gate replacement.
-2. Signing and Apple notarization passed. The exported candidate passed component verification, ticket validation, Gatekeeper assessment and read-only CLI checks; its ZIP and hash are recorded in progress. No credentials go in chat or tracked files.
-3. Preserve closed review findings and tests; re-review security changes made during signed integration. Keep checks strict; failed/blocked checks stay visible.
-4. Run the signed-helper spike and negative/positive integration protocol once the isolated test setup is approved. Never weaken peer checks to make an unsigned build privileged.
-5. Execute clean-install/lifecycle and attended physical power protocols only when their actual environment and approvals are available. Never treat elapsed time as approval.
+For a future authorized binary-release task:
+
+1. Reconcile existing maintainer results with the named signed-helper, account-authorization, lifecycle and physical-power matrices. Record the actual tested build and scope; collect missing cases without treating a broad success report as either no testing or proof of every case.
+2. Complete the specific remaining UI evidence in the [Quiet Agenda runbook](../quiet-agenda-ui/implement.md), including attended VoiceOver speech and Escape dismissal. Keep deterministic snapshots separate from interaction and hardware proof.
+3. Build and validate a current signed/notarized candidate using the [release procedure](../../release/README.md). The earlier successful notarized artifact predates the UI changes. Re-run required source gates for changed code and bind release evidence to the actual candidate.
+4. Retain review fixes and strict failure reporting. Re-review any security changes; never weaken peer checks to make an unsigned build privileged.
 
 ## Dependencies and recovery
 
-The approved Developer ID identity is installed and local signing succeeded after Keychain approval. Apple accepted the candidate; the exported app has a valid stapled ticket and Gatekeeper reports Notarized Developer ID. Current R2 source passed snapshot/check/strict validation. Installed XPC/runtime validation, manual packaged-app/accessibility checks and attended physical checks remain open. No helper or live power schedule has been changed. The real cold-start/shutdown protocol remains in [power-cycle.md](../../testing/power-cycle.md). Preserve external schedule edits; do not restore stale snapshots.
+Live helper, account and power checks require the approved setup and applicable authorization. Follow the [testing guide](../../testing/README.md) and [power-cycle protocol](../../testing/power-cycle.md). Preserve external schedule edits; never restore a stale snapshot. Any new disruptive check must stay within the explicitly approved setup and scope.
 
 ## Before stopping
 
-Update progress with actual outcomes, pending gates and a concrete next action; keep the active task and revision synchronized. Do not claim final completion, publish, or commit without the applicable authorization.
+Update progress with actual outcomes, evidence gaps and a concrete next action. Preserve historical receipts and distinguish maintainer reports from agent-executed checks. The maintainer authorized a local commit of this documentation reconciliation; push, publication and live system operations remain outside this task.

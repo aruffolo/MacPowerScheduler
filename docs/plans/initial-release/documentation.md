@@ -33,6 +33,8 @@ Accepted under `R1` by the end-to-end implementation request: supervised phases,
 
 ## Discoveries
 
+These discoveries record the initial investigation. Dated execution updates below are historical; [progress.md — Resume Here](progress.md#resume-here) owns current implementation and validation status.
+
 ### DISC-1 — Greenfield baseline
 
 The target directory was empty and not a Git repository. There are no existing application tests or behavior to preserve. Regression concerns apply instead to host power settings, other schedule consumers, and newly established behavior. Evidence: `E-0` in `progress.md`. No plan revision change.
@@ -58,9 +60,9 @@ No physical cold-start, wake, scheduled-shutdown, helper, or release-signing tes
 | ID | Classification / impact | Resolution path and unlock condition | Status |
 |---|---|---|---|
 | `Q-1` | Contract: inferred edge behavior, validation floor, execution mode. | User reviews `R1`, including `INT-1`–`INT-3`, and explicitly authorizes implementation before production work. | Resolved: user authorized end-to-end implementation on 2026-09-27. |
-| `Q-2` | Technical: helper trust, account authorization/grant persistence, contributor signing. Blocks privileged delivery. | `P0-T2` spike proves approved/denied/revoked paths and a documented signing approach without weakened trust. | Partial: local signing and the signed archive are verified; installed signed runtime spike remains unexecuted. |
-| `Q-3` | Technical: cold startup/wake behavior and normal shutdown on target hardware. Blocks hardware claims. | `P0-T3` defines procedure; `VAL-POWER` supplies attended real-device evidence in P5. Failure triggers investigation or explicit scope revision. | Open; maintenance window not booked. |
-| `Q-4` | Technical/environment: exact minimum OS, signed distribution credentials, notarization access, clean-install test environment. | `P0-T2`/`P0-T4` confirm capabilities without dumping identities/secrets, lock API/build requirements, record any exact external blocker. | Partial: macOS 14 deployment, both architectures, Developer ID signing, Apple notarization and Gatekeeper acceptance verified; clean-install evidence remains open. |
+| `Q-2` | Technical: helper trust, account authorization/grant persistence, contributor signing. Blocks privileged delivery. | `P0-T2` spike proves approved/denied/revoked paths and a documented signing approach without weakened trust. | Partial evidence: signing/archive verified and maintainer reports functional success; itemized signed-peer/account and contributor-signing results remain to reconcile in progress. |
+| `Q-3` | Technical: cold startup/wake behavior and normal shutdown on target hardware. Blocks hardware claims. | `P0-T3` defines procedure; `VAL-POWER` supplies attended real-device evidence in P5. Failure triggers investigation or explicit scope revision. | Maintainer reports testing complete and working on the Intel Mac mini / macOS 15.7.4; individual cold-start/wake/shutdown outcomes were not specified. Reconcile the physical-test receipt before marking every case passed. |
+| `Q-4` | Technical/environment: exact minimum OS, signed distribution credentials, notarization access, clean-install test environment. | `P0-T2`/`P0-T4` confirm capabilities without dumping identities/secrets, lock API/build requirements, record any exact external blocker. | Partial evidence: macOS 14 deployment and an earlier universal signed/notarized candidate verified; a candidate containing the current UI and itemized clean-install/lifecycle results remain to record. |
 
 ## Deviations and behavioral notes
 

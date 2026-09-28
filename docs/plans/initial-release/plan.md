@@ -3,7 +3,7 @@
 ## Plan control
 
 - Revision: `R2`, approved 2026-09-27. User explicitly requested replacing app UI automation with snapshots and approved the discussed test-only Point-Free dependency.
-- Status: **approved for implementation; external operational gates remain required**.
+- Status: **implementation complete; final release evidence reconciliation remains**. Current results and remaining gates are in [progress.md](progress.md#resume-here).
 - Execution mode: supervised phased execution, authorized by the user’s request to start the plan end to end.
 - Contract source: current user request, discovery answers Q1–Q10, and the user-authored portions of the shared conversation.
 - Approval: product decisions `DEC-1`–`DEC-10` accepted; `INT-1`–`INT-3` and execution contracts accepted by the user’s end-to-end implementation request on 2026-09-27.

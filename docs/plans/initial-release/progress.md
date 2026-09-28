@@ -2,36 +2,38 @@
 
 ## Resume Here
 
-- Current request (2026-09-28): maintainer reports testing complete and the app working on this Intel Mac mini / macOS 15.7.4; improve the public README and contributor guidance. PRs of any size are welcome without an issue first. See the documentation receipt below; earlier detailed validation entries retain their original evidence scope.
-- Overall execution status: application implemented; earlier signed/notarized candidate verified. R2 snapshot replacement passed check/strict gates with 20 reviewed images; installed-helper, manual UI and physical gates remain open.
-- Latest correction: editor drafts survive read failures; TDD reproduction and fix verified with fresh check/strict gates (98 unit tests, 97.74% scoped coverage). See the draft-preservation receipt below.
+- Current request (2026-09-28): reconcile active documentation after the open-source readiness review. This section is the current project status; dated receipts below preserve their original scope.
+- Source checkpoint: `3ba85ee`, including draft preservation (`8cbb629`), Quiet Agenda/Deep Sapphire (`d48cd36`), Settings refresh alignment (`16c722c`), and public README/contributor guidance (`3ba85ee`). PRs of any size are welcome without an issue first.
+- Automated validation: fresh `make check` and `make test-strict` passed at this checkpoint: 100 unit tests, 4 adapter tests, 22 tooling tests, 50 snapshot cases, build/static analysis and actual read-only CLI checks. Scoped unit coverage is 1024/1047 executable lines (97.80%); it excludes live integration and UI rendering. See the readiness-review receipt below.
+- Functional testing: the maintainer reports that testing is complete and the app works on this Intel Mac mini / macOS 15.7.4. This is successful maintainer-reported testing, not an itemized signed-peer, lifecycle or physical-power receipt. Do not describe that testing as unperformed or infer results for unreported cases or other hardware.
+- Remaining evidence: reconcile the maintainer's results with the release matrices before claiming every release gate passed. The redesigned UI still has explicit VoiceOver speech and Escape-dismissal evidence gaps in [Quiet Agenda progress](../quiet-agenda-ui/progress.md). The earlier verified notarized ZIP predates the current UI; it does not certify a binary built from this checkpoint.
 - Plan revision observed: `R2`, user-approved replacement of app UI automation with Point-Free snapshots on 2026-09-27.
 - Execution mode: supervised; Goal mode not enabled.
-- Active phase/task: `P3` / `VAL-GUI`, automated snapshot/model evidence complete; manual packaged-app/accessibility and signed production checks remain.
-- Next action: resume the outstanding attended validation gates after the authorized local documentation and Settings alignment commits. Repository and release publication remain separately gated.
-- Dependencies: snapshots no longer use an XCTest app automation runner. Signed-helper and attended power tests still need their approved environment. Earlier off-console failure remains historical evidence under R1.
-- Working tree: initial local source checkpoint authorized and prepared; no pushes or publication. See the initial-commit receipt below.
-- Host schedule: no helper registration, grant creation, schedule mutation or physical power test authorized by this work.
+- Active phase/task: `P7` evidence reconciliation; implementation and automated UI work are complete, with detailed release proof still partial.
+- Next action for binary release: map available functional results to the named gates, collect only missing evidence in an approved setup, and build/verify a fresh signed/notarized candidate. Repository and release publication remain separately authorized actions.
+- Current documentation task: no app code or host settings changed; the maintainer authorized a local commit of this reconciliation. No new live test, push or publication authorized.
 - Updated: 2026-09-28.
 
-Native LLVM selected-file HTML/text/JSON remains available through `make coverage-report` for unchanged retained inputs. Current source changes require fresh coverage; earlier receipts below remain historical evidence.
+Native LLVM selected-file HTML/text/JSON remains available through `make coverage-report` for unchanged retained inputs. A later source change requires fresh coverage; a documentation-only edit does not invalidate this checkpoint's measurement.
 
 ## Phase status
 
 | Phase | Status | Exit evidence / remaining work |
 |---|---|---|
-| P0 Discovery and Baseline | partial | Contracts accepted; signing verified; installed XPC runtime spike unexecuted |
+| P0 Discovery and Baseline | partial evidence | Contracts accepted; signing verified; itemized installed XPC trust evidence not recorded |
 | P1 Project foundation and scheduling core | implemented; independent gates passed | CORE/SYSTEM/Debug+universal BUILD passed |
-| P2 Privileged helper and account authorization | implemented; partial | Injected service/grant tests pass; real signed integration blocked |
-| P3 Minimal native application | implemented; partial | R2 model tests and 20 light/dark snapshots pass; manual packaged-app/accessibility and signed GUI mutation matrix remain open |
-| P4 CLI for agents | implemented; partial | Parser/runner tests and actual read-only process checks passed; signed writes blocked |
-| P5 Release packaging and physical validation | partial | Signed/notarized artifact verified; lifecycle and POWER unexecuted |
-| P6 Hardening | partial | Four review passes, fixes, re-reviews and independent checks complete; signed/runtime gates open |
-| P7 Final Verification and Handoff | partial handoff only | Evidence reconciled; notarized artifact prepared; full completion contract unfulfilled |
+| P2 Privileged helper and account authorization | implemented; partial evidence | Injected service/grant tests pass; itemized signed-peer/account matrix not recorded |
+| P3 Minimal native application | implemented; partial evidence | Current model tests and 50 snapshot cases pass; Quiet Agenda interaction gaps are tracked separately |
+| P4 CLI for agents | implemented; partial evidence | Parser/runner and actual read-only process checks pass; itemized signed-write results not recorded |
+| P5 Release packaging and physical validation | partial evidence | Earlier notarized artifact verified; maintainer reports functional success; lifecycle/POWER details and a current candidate receipt remain to reconcile |
+| P6 Hardening | automated checks and reviews complete; partial runtime evidence | Review fixes and re-reviews complete; detailed signed/runtime matrix not recorded |
+| P7 Final Verification and Handoff | active; partial evidence | Current source checks and maintainer report summarized above; full binary-release completion contract not yet evidenced |
 
 Completed means passed exit evidence, not simply code written. Independent work continues under the plan's blocked-work rule; this does not waive prerequisites or certify a later phase complete.
 
 ## Execution log
+
+The following entries are historical receipts as of their dates and source revisions. Earlier pending work, counts and authorization limits are not the current status; use Resume Here above.
 
 ### 2026-09-26–27 — P0-T1 read-only discovery
 
@@ -50,7 +52,7 @@ Completed means passed exit evidence, not simply code written. Independent work 
 
 ## Validation evidence
 
-`VAL-0` baseline is recorded below. Later implementation evidence supersedes planning-only state; signed `VAL-SPIKE` remains blocked.
+`VAL-0` and later receipts are recorded below. Their results apply to their stated checkpoints; current evidence gaps are summarized in Resume Here.
 
 ### E-0 — Empty-project and host baseline
 
@@ -317,3 +319,11 @@ Project/workspace/scheme regeneration is hash-stable. Python sources compile and
 - User explicitly requested committing all pending work and leaving Git clean, with separate commits where appropriate. The README rewrite, CONTRIBUTING.md and their planning notes form one documentation change; the Settings refresh alignment fix is separate.
 - Rechecked README/CONTRIBUTING local links and screenshot paths, documented Make targets and code-fence balance against the current checkout. All pass. No external publication or live system operation is included.
 - Pre-commit Codex autoreview covered the complete pending text changes and returned no actionable findings. The concurrent Settings fix also passed fresh `make check` and `make test-strict`; its separate evidence receipt lives in the Quiet Agenda progress file. Local commit authorization does not close the outstanding attended release gates.
+
+### 2026-09-28 — Readiness review at `3ba85ee`
+
+- Reviewed the committed draft fix, Quiet Agenda/Deep Sapphire UI, Settings alignment and contributor documentation. Fresh `make check` and `make test-strict` passed at `3ba85ee`: 100 unit tests in 15 suites, 4 adapter tests, 22 tooling tests, 50 snapshot cases, Debug build/static analysis and actual CLI read-only status/error/help checks.
+- Fresh scoped coverage: 1024/1047 executable lines, 97.80%. Inputs: `.build/Coverage/unit-n41pzgou/`; snapshots and live integration remain outside the deterministic unit numerator. Logs retained locally in `.build/ReadinessReview/check.log` and `.build/ReadinessReview/strict.log`; these ignored artifacts are not public documentation attachments.
+- Maintainer-reported functional success on this Intel Mac mini / macOS 15.7.4 remains valid evidence at its stated scope. This review performed no new helper registration, grant change, schedule mutation or power cycle. It did not create or validate a new release artifact.
+- Documentation reconciliation updates current status, committed-work references, UI routing and architecture guidance while retaining historical receipts. The approved current accent is Deep Sapphire. Detailed release matrices and the remaining attended UI checks are tracked as evidence gaps, not as a claim that the maintainer did no testing.
+- Documentation validation: all 31 local Markdown links/anchors across the nine changed files, rule-loading paths, code fences, file lengths and `git diff --check` passed. Application suites were not repeated for these documentation-only edits; the source checkpoint above is unchanged. No commit or push performed.

@@ -1,6 +1,6 @@
 # MacPowerScheduler architecture
 
-Status: implemented under plan revision `R2`; signed runtime validation remains pending. Product decisions live in [documentation.md](../plans/initial-release/documentation.md), contracts in [plan.md](../plans/initial-release/plan.md), and observations in [progress.md](../plans/initial-release/progress.md).
+Implemented under initial-release plan revision `R2`, with the [Quiet Agenda presentation](../plans/quiet-agenda-ui/documentation.md). Product decisions live in [documentation.md](../plans/initial-release/documentation.md), contracts in [plan.md](../plans/initial-release/plan.md), and current validation status in [progress.md](../plans/initial-release/progress.md#resume-here).
 
 ## Repository structure
 
@@ -72,7 +72,7 @@ The operating system persists and executes the schedule. No app-owned scheduler 
 
 Peer identity and user authorization are separate. Require expected signing identities/identifiers on both XPC directions, using public APIs. A valid signature alone does not grant every local account write access. Derive account identity from the actual connection, never a user ID in the request payload. Keep per-connection authorization state isolated and validate all IPC types/ranges in the helper.
 
-GUI changes use system-managed authorization when needed. Automation enrollment/revocation requires an authenticated user action. A helper-owned, access-controlled grant enables noninteractive writes for the enrolled account only; re-check grants at mutation time, including on existing connections after revocation. The implemented root-owned grant store binds grants to OpenDirectory account GUIDs; signed runtime validation remains a required open gate. GUI authorization uses the asynchronous system API and retains its authorization lease until the helper replies.
+GUI changes use system-managed authorization when needed. Automation enrollment/revocation requires an authenticated user action. A helper-owned, access-controlled grant enables noninteractive writes for the enrolled account only; re-check grants at mutation time, including on existing connections after revocation. The implemented root-owned grant store binds grants to OpenDirectory account GUIDs. Signed runtime validation requirements belong to the release plan; current evidence belongs to progress. GUI authorization uses the asynchronous system API and retains its authorization lease until the helper replies.
 
 The service exposes schedule read/replace/partial-edit and authorized automation management operations, not an executable runner. Limit process output/time, sanitize inherited environment, and avoid logging credentials or unsanitized diagnostics. CLI scripts fail promptly with structured actionable errors when authorization requires interaction.
 
@@ -82,7 +82,7 @@ Removing the helper revokes its grants but does not silently remove the system s
 
 `SMAppService` and the selected `NSXPCConnection` signing requirement APIs have a macOS 13 lower bound. The implemented SwiftUI model uses Observation (macOS 14), setting the final deployment target to macOS 14. Do not claim a runtime test merely because deployment-target compilation succeeds.
 
-Use the installed Xcode/Swift toolchain, Swift Testing for deterministic logic, and test-only Point-Free SnapshotTesting for SwiftUI rendering. The app wrapper owns live refresh; shared SwiftUI content accepts the model. Only the snapshot harness uses NSHostingView. Signed integration probes and manual packaged-app checks cover process/bundle identity. Use strict concurrency checks, with platform-specific code behind interfaces. No third-party runtime dependency is introduced.
+Use the installed Xcode/Swift toolchain, Swift Testing for deterministic logic, and test-only Point-Free SnapshotTesting for SwiftUI rendering. The app wrapper owns live refresh; the Quiet Agenda screen and Settings sheet share one model. View-local state owns presentation. `AgendaTimePicker` bridges native `NSDatePicker` through `NSViewRepresentable` for time editing; scheduling decisions remain in the model. Only the snapshot harness uses NSHostingView. Signed integration probes and manual packaged-app checks cover process/bundle identity. Use strict concurrency checks, with platform-specific code behind interfaces. No third-party runtime dependency is introduced.
 
 Published binaries use Developer ID signing, hardened runtime, notarization, and ticket validation. A contributor signing configuration must keep peer checks meaningful with the contributor's identity. Unsigned builds can exercise pure tests and read-only logic; successful privileged source-build setup is a separate feasibility gate, not a promised unsigned-root mode.
 

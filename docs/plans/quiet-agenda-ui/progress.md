@@ -2,13 +2,13 @@
 
 ## Resume Here
 
-- Status: Quiet Agenda and Deep Sapphire committed as `d48cd36`; Settings refresh alignment follow-up prepared; attended accessibility/keyboard validation remains partial.
+- Status: Quiet Agenda and Deep Sapphire committed as `d48cd36`; Settings refresh alignment committed as `16c722c`; attended accessibility/keyboard validation remains partial.
 - Plan revision observed: `R2`; execution mode: supervised, no Goal mode.
 - Active phase/task: `P4` / final receipt, with open `VAL-INTERACTION` evidence from P1/P2.
 - Next action: attended VoiceOver speech and Escape dismissal checks on the signed build; reconcile SC-4/5 and final gate only after that evidence exists.
 - Blockers: native automation returns contradictory/stale focused-window receipts for keyboard events; screenshot observations verify some effects, but not Escape dismissal or spoken VoiceOver behavior. Destructive confirmation clicks remain outside authorization under ai-rules/tooling.md. Live operations remain separately gated.
-- Validated source: `d48cd36` contains the implementation and palette verified in the receipts below. Follow-up Settings alignment validation is recorded separately; earlier source hashes remain historical evidence.
-- Working tree on entry: existing README.md, initial-release implement/progress edits, CONTRIBUTING.md and concept files. Preserved prior work; README received only the additional UI guidance changes described below.
+- Validated source: fresh `make check` and `make test-strict` passed at `3ba85ee`, which includes both UI commits and contributor documentation. Current project-wide results and maintainer-reported functional testing are summarized in [initial-release progress](../initial-release/progress.md#resume-here).
+- Working tree on original UI-task entry: existing README.md, initial-release implement/progress edits, CONTRIBUTING.md and concept files. That work was preserved and subsequently committed; this is historical context, not pending work.
 - Updated: 2026-09-28.
 
 ## Phase status
@@ -22,6 +22,8 @@
 | P4 Final Verification and Handoff | partial; attended check outstanding | No full-completion claim while required interaction evidence remains open |
 
 ## Execution log
+
+Entries below retain their original dates, source revisions and task scope. Statements about pending commits, counts or unperformed checks describe that point in time; Resume Here is the current status.
 
 ### 2026-09-28 — P0-T1/T2 planning checkpoint
 

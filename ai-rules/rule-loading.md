@@ -24,6 +24,8 @@ Load when:
 Required:
 - @docs/plans/initial-release/prompt.md
 - @docs/plans/initial-release/documentation.md
+- @docs/plans/quiet-agenda-ui/prompt.md
+- @docs/plans/quiet-agenda-ui/documentation.md
 - @ai-rules/swiftui.md
 - @ai-rules/ui-styling.md
 
@@ -42,6 +44,8 @@ Load when:
 Required:
 - @docs/plans/initial-release/prompt.md
 - @docs/plans/initial-release/documentation.md
+- @docs/plans/quiet-agenda-ui/prompt.md
+- @docs/plans/quiet-agenda-ui/documentation.md
 - @ai-rules/ui-styling.md
 
 Optional:
