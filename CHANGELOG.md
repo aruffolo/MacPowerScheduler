@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Replace the original teal app icon with the sapphire Precision Power design, with system-generated rounded icons for supported macOS versions.
+
 ## 0.1.0
 
 - Add a native macOS daily wake/power-on and shutdown editor with the Quiet Agenda interface and Settings.

@@ -55,7 +55,7 @@ for name, product, source, library, product_type, bundle in specs:
     dependencies = []
     if is_app:
         phases.insert(0, obj("swiftlint", "PBXShellScriptBuildPhase", buildActionMask="2147483647", files=[], inputPaths=[], outputPaths=[], name="SwiftLint", shellPath="/bin/bash", shellScript='set -euo pipefail\nbash "$SRCROOT/Tools/lint.sh"\n', alwaysOutOfDate="1", runOnlyForDeploymentPostprocessing="0"))
-        asset_ref = file("App/Assets.xcassets", "folder.assetcatalog")
+        asset_ref = file("App/AppIcon.icon", "folder.iconcomposer.icon")
         sources.append(asset_ref)
         asset_build = obj("assetbuild", "PBXBuildFile", fileRef=asset_ref)
         phases.append(obj("resources", "PBXResourcesBuildPhase", buildActionMask="2147483647", files=[asset_build], runOnlyForDeploymentPostprocessing="0"))

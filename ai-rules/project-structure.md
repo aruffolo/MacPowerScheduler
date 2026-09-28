@@ -14,4 +14,4 @@
 - Swift Package tests live in `Package/Tests/` (Swift Testing), including `PowerScheduleSnapshotTests` and its reviewed PNG references.
 
 ## Resources
-- App assets live under `App/Assets.xcassets/`. Add package-owned resources to their owning target only when needed; do not duplicate resources across targets.
+- App icon lives in `App/AppIcon.icon`; other app assets belong under `App/Assets.xcassets/`. Add package-owned resources to their owning target only when needed; do not duplicate resources across targets.

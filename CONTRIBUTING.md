@@ -73,7 +73,7 @@ You do not need to edit a changelog; the maintainer handles release notes when l
 
 Read the [architecture](docs/architecture/overview.md), [module boundaries](Package/ModuleRules.md), and [security model](docs/security.md) before changing cross-process behavior. Production code uses native frameworks; Point-Free SnapshotTesting is a test-only dependency. Explain the need for any proposed dependency in your PR.
 
-The generated Xcode project and workspace are checked in. Run `make generate` when target layout changes; it uses Python's standard library. The original app icon is generated with `xcrun swift Tools/generate_icon.swift`.
+The generated Xcode project and workspace are checked in. Run `make generate` when target layout changes; it uses Python's standard library. The app icon lives in `App/AppIcon.icon`, using the approved Precision Power artwork as an unmasked 1024 × 1024 sRGB PNG. Edit that bundle with Icon Composer; Xcode compiles the modern icon and generates the rounded fallback for earlier supported macOS versions. Do not pre-round the source image or add a duplicate `AppIcon.appiconset`.
 
 Commit shared schemes, shared package configuration, app assets, reviewed snapshot references, and `Package/Package.resolved`. Keep build/test artifacts, Xcode user state, local signing configuration, and credentials out of Git. The [ignore policy](.gitignore) is adapted from GitHub's [Swift](https://github.com/github/gitignore/blob/main/Swift.gitignore), [Xcode](https://github.com/github/gitignore/blob/main/Global/Xcode.gitignore), and [macOS](https://github.com/github/gitignore/blob/main/Global/macOS.gitignore) templates.
 
