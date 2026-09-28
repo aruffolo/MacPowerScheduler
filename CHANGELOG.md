@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.1
 
 - Fit the main window and Settings to their content, retaining scrolling when the current display cannot accommodate the full height.
 - Replace the original teal app icon with the sapphire Precision Power design, with system-generated rounded icons for supported macOS versions.
