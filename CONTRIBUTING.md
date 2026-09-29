@@ -38,7 +38,7 @@ make test-strict
 
 `make check` runs lint, fresh unit coverage, adapter/tooling/snapshot tests, a Debug build, and static analysis. `make test-strict` runs the test suites and the built CLI's read-only subprocess checks. Default tests never install the helper, change the real power schedule, or shut down the machine.
 
-Pull requests run the same gates in [GitHub Actions](docs/testing/ci.md), plus the universal build check. See that page for hosted validation and branch-protection status. Snapshot environment differences remain failures requiring review.
+Pull requests that change code, tests, tooling, configuration or other non-documentation files run the same gates in [GitHub Actions](docs/testing/ci.md), plus the universal build check. Changes limited to the documented Markdown allowlist use lightweight Linux checks instead, on both PRs and pushes to `main`. Run `python3 Tools/check_docs.py` and `git diff --check` locally for those changes; review examples and external links manually. See the CI guide for the exact allowlist and branch-protection status. Snapshot environment differences remain failures requiring review.
 
 For focused work:
 

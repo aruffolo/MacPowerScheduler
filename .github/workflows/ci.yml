@@ -15,8 +15,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
-    name: macOS validation
+  changes:
+    name: Documentation and change classification
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      full_validation: ${{ steps.classify.outputs.full_validation }}
+    steps:
+      - name: Check out source and comparison history
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Test CI routing and documentation checks
+        run: |
+          PYTHONOPTIMIZE=1 python3 -m unittest discover -s Tools/tests -p test_ci.py -v
+          PYTHONOPTIMIZE=1 python3 -m unittest discover -s Tools/tests -p test_check_docs.py -v
+
+      - name: Check documentation
+        run: python3 Tools/check_docs.py
+
+      - name: Classify changes and check whitespace
+        id: classify
+        run: python3 Tools/ci.py classify
+
+  macos:
+    name: macOS tests and build
+    needs: changes
+    if: ${{ needs.changes.outputs.full_validation == 'true' }}
     runs-on: macos-15-intel
     timeout-minutes: 45
     defaults:
@@ -95,3 +122,21 @@ jobs:
             .build/Coverage/unit-*/tests.log
             .build/Coverage/unit-*/llvm.log
             .build/Coverage/unit-*/summary.md
+
+  validate:
+    # Preserve the existing required check without changing main's ruleset.
+    name: macOS validation
+    needs: [changes, macos]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+
+      - name: Verify required results
+        env:
+          CI_NEEDS: ${{ toJSON(needs) }}
+        run: python3 Tools/ci.py result
