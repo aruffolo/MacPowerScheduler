@@ -20,7 +20,16 @@ MacPowerScheduler manages the system's single repeating schedule. One-time power
 
 Requires **macOS 14 or later**. Builds for **Intel and Apple Silicon**. Tested on an **Intel Mac mini running macOS 15.7.4**; other hardware and macOS versions have not been verified.
 
-With a signed copy of the app:
+Download **v0.1.2 (pre-release)**:
+
+| Download | Macs supported |
+| --- | --- |
+| [Universal](https://github.com/aruffolo/MacPowerScheduler/releases/download/v0.1.2/MacPowerScheduler-macos-universal-0.1.2.zip) | Intel and Apple Silicon |
+| [Apple Silicon only](https://github.com/aruffolo/MacPowerScheduler/releases/download/v0.1.2/MacPowerScheduler-macos-arm64-0.1.2.zip) | Apple Silicon; smaller download |
+
+Both downloads are Developer ID signed and notarized by Apple. See the [release notes](https://github.com/aruffolo/MacPowerScheduler/releases/tag/v0.1.2) for validation limits and debug symbols, and [SHA256SUMS](https://github.com/aruffolo/MacPowerScheduler/releases/download/v0.1.2/SHA256SUMS) for ZIP checksums.
+
+Extract the downloaded ZIP, then:
 
 1. Move **MacPowerScheduler.app** into **Applications** and open it.
 2. Select **Enable Power Scheduling** in the setup banner or **Settings** (the top-right gear, also Command-comma). If approval is required, select **Open System Settings**; macOS handles service approval and administrator authentication.

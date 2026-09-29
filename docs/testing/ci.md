@@ -14,15 +14,15 @@ The [first hosted run](https://github.com/aruffolo/MacPowerScheduler/actions/run
 
 An environment mismatch remains a failed check. Inspect failure images before proposing an explicitly reviewed baseline migration; never automatically record references or relax comparison tolerance. A hosted CI pass does not prove physical startup, helper authorization or accessibility behavior. See the [validation procedures](README.md).
 
-## Recommended protection for main
+## Protection for main
 
-Enable a repository ruleset after the workflow has completed successfully on GitHub and its check name/source can be selected:
+The active `Protect main` ruleset (ID 24172205) applies to `main`:
 
 - Require a pull request, with zero required approving reviews while the project has one maintainer. Contributors still need a maintainer to merge; this avoids requiring a second person to approve the maintainer's own PRs.
 - Require `macOS validation` from GitHub Actions and require the branch to be up to date before merging.
 - Require review conversations to be resolved.
 - Block force pushes and branch deletion, with no routine bypass actors.
 
-Do not enable the required check before validating its actual emitted name and first successful run. Otherwise a configuration mistake can block every merge. Additional approval requirements can be added when another active maintainer is available. Branch protection is repository configuration; adding this file does not enable it.
+The required check was verified against successful hosted runs before enabling protection. Additional approval requirements can be added when another active maintainer is available. These rules apply to maintainers too: use a pull request for subsequent changes to `main`.
 
-The workflow is published to the private `aruffolo/MacPowerScheduler` repository and has completed a successful hosted run. The observed check name is `macOS validation`, from the `github-actions` app (ID 15368). GitHub currently rejects ruleset access for this private repository with an upgrade-to-Pro requirement, so protection is not enabled. Enable the ruleset after either an account upgrade or a separately authorized switch to public visibility; repository visibility remains private until that separate decision.
+The maintainer authorized making `aruffolo/MacPowerScheduler` public on 2026-09-29. GitHub then accepted the ruleset; readback confirmed active enforcement, no bypass actors, and `main` marked protected. The required check is `macOS validation`, from the `github-actions` app (ID 15368). Private-repository plan restrictions previously blocked this setup; that limitation no longer applies to the public repository.
