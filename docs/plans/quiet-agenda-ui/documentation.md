@@ -20,6 +20,8 @@ The maintainer requested enough window space to avoid scroll indicators and expl
 
 The maintainer selected option 2 from the revised Apple-inspired icon proposals and supplied the resized artwork in `AppIcons.zip`. The canonical asset is `App/AppIcon.icon`, with the archive's unmasked 1024px sRGB artwork and Icon Composer configuration. Xcode generates the mask and earlier-macOS renditions; the obsolete teal drawing script and legacy catalog are removed. This is flattened artwork in an Icon Composer bundle, not separately authored glass layers.
 
+On 2026-09-29 the maintainer selected the revised sun-and-moon artwork supplied in `AppIcons-2.zip`. Its unmasked, fully opaque 1024px sRGB catalog PNG replaces the canonical image byte-for-byte; the existing Icon Composer configuration is identical to the new archive's. The supplied artwork is preserved without further geometric or styling edits.
+
 ### INT-1 — Faithful, functional reproduction
 
 Grounded implementation interpretation: match the selected app window, excluding the image's exterior framing. Derive point-space measurements before implementation; an approximately 580-point-wide window is a starting measurement, not permission to redesign. Use live model state instead of freezing the pictured times or permanently showing “Unsaved changes.” Preserve native input, locale formatting, keyboard access, and dark mode required by repository policy. Any material mismatch with the selected style requires an explicit decision; an approximate resemblance is not the acceptance target. Related: `P0-T3`, `VAL-VISUAL`.

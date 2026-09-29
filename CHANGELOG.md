@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Add a crescent moon beside the sun in the sapphire Precision Power app icon using the selected revised artwork.
+
 ## 0.1.1
 
 - Fit the main window and Settings to their content, retaining scrolling when the current display cannot accommodate the full height.
