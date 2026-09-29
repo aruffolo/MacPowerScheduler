@@ -2,7 +2,7 @@
 
 ## Resume Here
 
-- Current request (2026-09-29): make the repository public, protect `main`, and add release download links. Public visibility and active branch protection are verified. The [v0.1.2 release](https://github.com/aruffolo/MacPowerScheduler/releases/tag/v0.1.2) remains a pre-release; both app downloads are anonymously accessible. The README includes direct downloads; the CI guide records the active protection rules.
+- Current request (2026-09-29): implement lightweight documentation CI and open a PR against protected `main`. Baseline is `9260eb6` (public-download/protection documentation, PR #1 merged). Public visibility and branch protection remain active; [v0.1.2](https://github.com/aruffolo/MacPowerScheduler/releases/tag/v0.1.2) remains the current pre-release. No app source or release artifacts change in this task.
 - Release-source checkpoint: `2423bc9` (v0.1.2), including the sun-and-moon icon and content-fitting main/Settings windows. Latest pre-documentation `main` is `4dfad22`; hosted CI passed on both commits. PRs of any size are welcome without an issue first.
 - Automated validation: fresh `make check` and `make test-strict` passed for this release change: 100 unit tests, 4 adapter tests, 33 tooling tests, 50 snapshot cases and 41 hosted layout cases, build/static analysis and actual read-only CLI checks. Scoped unit coverage is 1024/1047 executable lines (97.80%); it excludes live integration and UI rendering. See the readiness-review receipt below.
 - Functional testing: the maintainer reports that testing is complete and the app works on this Intel Mac mini / macOS 15.7.4. This is successful maintainer-reported testing, not an itemized signed-peer, lifecycle or physical-power receipt. Do not describe that testing as unperformed or infer results for unreported cases or other hardware.
@@ -11,7 +11,7 @@
 - Execution mode: supervised; Goal mode not enabled.
 - Active phase/task: `P7` evidence reconciliation; implementation and automated UI work are complete, with detailed release proof still partial.
 - Next stable-release action: reconcile the remaining named runtime/accessibility evidence. This public pre-release does not claim every stable-release gate passed. Exact source/ref and hosted checks are available from the GitHub release and Actions history.
-- Public visibility and main protection were explicitly authorized. New live system operations remain outside this task. Subsequent source changes require a pull request under the active ruleset; the maintainer authorized committing and pushing the documentation through that workflow.
+- Public visibility and main protection were explicitly authorized. New live system operations remain outside this task. Subsequent changes require a pull request under the active ruleset; the maintainer authorized implementing the documentation CI improvement and opening its PR. Merge is a separate action.
 - Updated: 2026-09-29.
 
 Native LLVM selected-file HTML/text/JSON remains available through `make coverage-report` for unchanged retained inputs. A later source change requires fresh coverage; a documentation-only edit does not invalidate this checkpoint's measurement.
@@ -34,6 +34,12 @@ Completed means passed exit evidence, not simply code written. Independent work 
 ## Execution log
 
 The following entries are historical receipts as of their dates and source revisions. Earlier pending work, counts and authorization limits are not the current status; use Resume Here above.
+
+### 2026-09-29 — Documentation CI fast path
+
+- Added conservative Markdown-only routing for PRs and main pushes, offline documentation checks, and an always-evaluated aggregate retaining the protected `macOS validation` context. Code, tools, workflows, assets, mixed/unknown paths, unavailable comparisons and manual runs retain full macOS validation. No app, helper, signing, release or security-reporting policy changes.
+- Fourteen new portable regressions pass, including temporary Git histories, full PR/push ranges, renames/deletions, missing comparison history, failed/skipped/cancelled result handling, and broken documentation references. The new suites were first run before their implementations existed, then passed after implementation. All 25 tracked allowlisted documents, actionlint 1.7.12 and diff whitespace checks passed.
+- Fresh local `make check`, `make test-strict` and `make build-universal` passed, including all 47 tooling tests. Scoped coverage remains 1024/1047 (97.80%); read-only CLI checks and universal bundle verification passed. Evidence is retained under ignored `.build/CI-docs-local/`. Codex autoreview returned no actionable findings and its task-scoped secret scan was clean. Hosted verification belongs to the PR; this receipt does not claim a documentation-only hosted run before the workflow lands.
 
 ### 2026-09-26–27 — P0-T1 read-only discovery
 
